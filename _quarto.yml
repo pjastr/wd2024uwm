@@ -1,0 +1,30 @@
+project:
+  type: book
+
+book:
+  title: "Wizualizacja Danych 2024"
+  author: Piotr Jastrzębski
+  date: today
+  cover-image: wd.jpg
+  chapters:
+    - index.qmd
+    - numpy.qmd
+  downloads: pdf
+  repo-url: https://github.com/pjastr/wd2024uwm
+  repo-actions: [issue]
+
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: solar
+    lang: pl
+  pdf:
+    lang: pl
+    header-includes: |
+      \titlehead{\includegraphics[width=6in]{wd.jpg}}
+
+
+editor: visual
+

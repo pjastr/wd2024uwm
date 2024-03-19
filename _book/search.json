@@ -1,0 +1,192 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Wizualizacja Danych 2024",
+    "section": "",
+    "text": "1 Wizualizacja Danych 2024\nMateriały na semestr letni - rok akademicki 2023/24.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Wizualizacja Danych 2024</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html",
+    "href": "numpy.html",
+    "title": "2  NumPy",
+    "section": "",
+    "text": "2.1 Import biblioteki NumPy\nPodstawowym bytem w bibliotece NumPy jest N-wymiarowa tablica zwana ndarray. Każdy element na tablicy traktowany jest jako typ dtype.\nimport numpy as np\n\n1a = np.array([1, 2, 3])\nprint(\"a:\", a) \n2print(\"typ a:\", type(a))\n3b = np.array([1, 2, 3.0])\nprint(\"b:\", b)\n4c = np.array([[1, 2], [3, 4]])\nprint(\"c:\", c)\n5d = np.array([1, 2, 3], ndmin=2)\nprint(\"d:\", d)\n6e = np.array([1, 2, 3], dtype=complex)\nprint(\"e:\", e)\n7f = np.array(np.mat('1 2; 3 4'))\nprint(\"f:\", f)\n8g = np.array(np.mat('1 2; 3 4'), subok=True)\nprint(\"g:\", g)\nprint(type(g))\n\n\n1\n\nStandardowe domyślne.\n\n2\n\nSprawdzenie typu.\n\n3\n\nJeden z elementów jest innege typu. Tu następuje zatem rozszerzenie do typu “największego”.\n\n4\n\nTu otrzymamy tablicę 2x2.\n\n5\n\nW tej linijce otrzymana będzie tablica 2x1.\n\n6\n\nUstalenie innego typu - większego.\n\n7\n\nSkorzystanie z podtypu macierzowego.\n\n8\n\nZachowanie typu macierzowego.\n\n\n\n\na: [1 2 3]\ntyp a: &lt;class 'numpy.ndarray'&gt;\nb: [1. 2. 3.]\nc: [[1 2]\n [3 4]]\nd: [[1 2 3]]\ne: [1.+0.j 2.+0.j 3.+0.j]\nf: [[1 2]\n [3 4]]\ng: [[1 2]\n [3 4]]\n&lt;class 'numpy.matrix'&gt;",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#import-biblioteki-numpy",
+    "href": "numpy.html#import-biblioteki-numpy",
+    "title": "2  NumPy",
+    "section": "",
+    "text": "import numpy as np\n\nnumpy.array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, like=None)\n\nobject - to co ma być wrzucone do tablicy\ndtype - typ\ncopy - czy obiekty mają być skopiowane, domyślne True\norder - sposób układania: C (rzędy), F (kolumny), A, K\nsubok - realizowane przez podklasy (jeśli True), domyślnie False\nndmin - minimalny rozmiar (wymiar) tablicy\nlike - tworzenie na podstawie tablic referencyjnej",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#lista-a-tablica",
+    "href": "numpy.html#lista-a-tablica",
+    "title": "2  NumPy",
+    "section": "2.2 Lista a tablica",
+    "text": "2.2 Lista a tablica\n\nimport numpy as np\nimport time\n\nstart_time = time.time()\nmy_arr = np.arange(1000000)\nmy_list = list(range(1000000))\nstart_time = time.time()\nmy_arr2 = my_arr * 2\nprint(\"--- %s seconds ---\" % (time.time() - start_time))\nstart_time = time.time()\nmy_list2 = [x * 2 for x in my_list]\nprint(\"--- %s seconds ---\" % (time.time() - start_time))\n\n--- 0.002133607864379883 seconds ---\n--- 0.055999040603637695 seconds ---",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#atrybuty-tablic-ndarray",
+    "href": "numpy.html#atrybuty-tablic-ndarray",
+    "title": "2  NumPy",
+    "section": "2.3 Atrybuty tablic ndarray",
+    "text": "2.3 Atrybuty tablic ndarray\n\n\n\n\n\n\n\nAtrybut\nOpis\n\n\n\n\nshape\nkrotka z informacją liczbę elementów dla każdego z wymiarów\n\n\nsize\nliczba elementów w tablicy (łączna)\n\n\nndim\nliczba wymiarów tablicy\n\n\nnbytes\nliczba bajtów jaką tablica zajmuje w pamięci\n\n\ndtype\ntyp danych\n\n\n\nhttps://numpy.org/doc/stable/reference/arrays.ndarray.html#array-attributes\n\nimport numpy as np\n\ntab1 = np.array([2, -3, 4, -8, 1])\nprint(\"typ:\", type(tab1))\nprint(\"shape:\", tab1.shape)\nprint(\"size:\", tab1.size)\nprint(\"ndim:\", tab1.ndim)\nprint(\"nbytes:\", tab1.nbytes)\nprint(\"dtype:\", tab1.dtype)\n\ntyp: &lt;class 'numpy.ndarray'&gt;\nshape: (5,)\nsize: 5\nndim: 1\nnbytes: 20\ndtype: int32\n\n\n\nimport numpy as np\n\ntab2 = np.array([[2, -3], [4, -8]])\nprint(\"typ:\", type(tab2))\nprint(\"shape:\", tab2.shape)\nprint(\"size:\", tab2.size)\nprint(\"ndim:\", tab2.ndim)\nprint(\"nbytes:\", tab2.nbytes)\nprint(\"dtype:\", tab2.dtype)\n\ntyp: &lt;class 'numpy.ndarray'&gt;\nshape: (2, 2)\nsize: 4\nndim: 2\nnbytes: 16\ndtype: int32\n\n\nNumPy nie wspiera postrzępionych tablic! Poniższy kod wygeneruje błąd:\nimport numpy as np\n\ntab3 = np.array([[2, -3], [4, -8, 5], [3]])",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#typy-danych",
+    "href": "numpy.html#typy-danych",
+    "title": "2  NumPy",
+    "section": "2.4 Typy danych",
+    "text": "2.4 Typy danych\nhttps://numpy.org/doc/stable/reference/arrays.scalars.html\nhttps://numpy.org/doc/stable/reference/arrays.dtypes.html#arrays-dtypes-constructing\n\n\n\n\n\n\n\nTypy całkowitoliczbowe\nint,int8,int16,int32,int64\n\n\nTypy całkowitoliczbowe (bez znaku)\nuint,uint8,uint16,uint32,uint64\n\n\nTyp logiczny\nbool\n\n\nTypy zmiennoprzecinkowe\nfloat, float16, float32, float64, float128\n\n\nTypy zmiennoprzecinkowe zespolone\ncomplex, complex64, complex128, complex256\n\n\nNapis\nstr\n\n\n\n\nimport numpy as np\n\ntab = np.array([[2, -3], [4, -8]])\nprint(tab)\ntab2 = np.array([[2, -3], [4, -8]], dtype=int)\nprint(tab2)\ntab3 = np.array([[2, -3], [4, -8]], dtype=float)\nprint(tab3)\ntab4 = np.array([[2, -3], [4, -8]], dtype=complex)\nprint(tab4)\n\n[[ 2 -3]\n [ 4 -8]]\n[[ 2 -3]\n [ 4 -8]]\n[[ 2. -3.]\n [ 4. -8.]]\n[[ 2.+0.j -3.+0.j]\n [ 4.+0.j -8.+0.j]]",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#tworzenie-tablic",
+    "href": "numpy.html#tworzenie-tablic",
+    "title": "2  NumPy",
+    "section": "2.5 Tworzenie tablic",
+    "text": "2.5 Tworzenie tablic\nnp.array - argumenty rzutowany na tablicę (coś po czym można iterować) - warto sprawdzić rozmiar/kształt\n\nimport numpy as np\n\ntab = np.array([2, -3, 4])\nprint(tab)\nprint(\"size:\", tab.size)\ntab2 = np.array((4, -3, 3, 2))\nprint(tab2)\nprint(\"size:\", tab2.size)\ntab3 = np.array({3, 3, 2, 5, 2})\nprint(tab3)\nprint(\"size:\", tab3.size)\ntab4 = np.array({\"pl\": 344, \"en\": 22})\nprint(tab4)\nprint(\"size:\", tab4.size)\n\n[ 2 -3  4]\nsize: 3\n[ 4 -3  3  2]\nsize: 4\n{2, 3, 5}\nsize: 1\n{'pl': 344, 'en': 22}\nsize: 1\n\n\nnp.zeros - tworzy tablicę wypełnioną zerami\n\nimport numpy as np\n\ntab = np.zeros(4)\nprint(tab)\nprint(tab.shape)\ntab2 = np.zeros([2, 3])\nprint(tab2)\nprint(tab2.shape)\ntab3 = np.zeros([2, 3, 4])\nprint(tab3)\nprint(tab3.shape)\n\n[0. 0. 0. 0.]\n(4,)\n[[0. 0. 0.]\n [0. 0. 0.]]\n(2, 3)\n[[[0. 0. 0. 0.]\n  [0. 0. 0. 0.]\n  [0. 0. 0. 0.]]\n\n [[0. 0. 0. 0.]\n  [0. 0. 0. 0.]\n  [0. 0. 0. 0.]]]\n(2, 3, 4)\n\n\nnp.ones - tworzy tablicę wypełnioną jedynkami (to nie odpowiednik macierzy jednostkowej!)\n\nimport numpy as np\n\ntab = np.ones(4)\nprint(tab)\nprint(tab.shape)\ntab2 = np.ones([2, 3])\nprint(tab2)\nprint(tab2.shape)\ntab3 = np.ones([2, 3, 4])\nprint(tab3)\nprint(tab3.shape)\n\n[1. 1. 1. 1.]\n(4,)\n[[1. 1. 1.]\n [1. 1. 1.]]\n(2, 3)\n[[[1. 1. 1. 1.]\n  [1. 1. 1. 1.]\n  [1. 1. 1. 1.]]\n\n [[1. 1. 1. 1.]\n  [1. 1. 1. 1.]\n  [1. 1. 1. 1.]]]\n(2, 3, 4)\n\n\nnp.diag - tworzy tablicę odpowiadającą macierzy diagonalnej\n\nimport numpy as np\n\nprint(\"tab0\")\ntab0 = np.diag([3, 4, 5])\nprint(tab0)\nprint(\"tab1\")\ntab1 = np.array([[2, 3, 4], [3, -4, 5], [3, 4, -5]])\nprint(tab1)\ntab2 = np.diag(tab1)\nprint(\"tab2\")\nprint(tab2)\ntab3 = np.diag(tab1, k=1)\nprint(\"tab3\")\nprint(tab3)\nprint(\"tab4\")\ntab4 = np.diag(tab1, k=-2)\nprint(tab4)\nprint(\"tab5\")\ntab5 = np.diag(np.diag(tab1))\nprint(tab5)\n\ntab0\n[[3 0 0]\n [0 4 0]\n [0 0 5]]\ntab1\n[[ 2  3  4]\n [ 3 -4  5]\n [ 3  4 -5]]\ntab2\n[ 2 -4 -5]\ntab3\n[3 5]\ntab4\n[3]\ntab5\n[[ 2  0  0]\n [ 0 -4  0]\n [ 0  0 -5]]\n\n\nnp.arange - tablica wypełniona równomiernymi wartościami\nSkładnia: numpy.arange([start, ]stop, [step, ]dtype=None)\nZasada działania jest podobna jak w funkcji range, ale dopuszczamy liczby “z ułamkiem”.\n\nimport numpy as np\n\na = np.arange(3)\nprint(a)\nb = np.arange(3.0)\nprint(b)\nc = np.arange(3, 7)\nprint(c)\nd = np.arange(3, 11, 2)\nprint(d)\ne = np.arange(0, 1, 0.1)\nprint(e)\nf = np.arange(3, 11, 2, dtype=float)\nprint(f)\ng = np.arange(3, 10, 2)\nprint(g)\n\n[0 1 2]\n[0. 1. 2.]\n[3 4 5 6]\n[3 5 7 9]\n[0.  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]\n[3. 5. 7. 9.]\n[3 5 7 9]\n\n\nnp.linspace - tablica wypełniona równomiernymi wartościami wg skali liniowej\n\nimport numpy as np\n\na = np.linspace(2.0, 3.0, num=5)\nprint(a)\nb = np.linspace(2.0, 3.0, num=5, endpoint=False)\nprint(b)\nc = np.linspace(10, 20, num=4)\nprint(c)\nd = np.linspace(10, 20, num=4, dtype=int)\nprint(d)\n\n[2.   2.25 2.5  2.75 3.  ]\n[2.  2.2 2.4 2.6 2.8]\n[10.         13.33333333 16.66666667 20.        ]\n[10 13 16 20]\n\n\n\nnp.logspace - tablica wypełniona wartościami wg skali logarytmicznej\nSkładnia: numpy.logspace(start, stop, num=50, endpoint=True, base=10.0, dtype=None, axis=0)\n\nimport numpy as np\n\na = np.logspace(2.0, 3.0, num=4)\nprint(a)\nb = np.logspace(2.0, 3.0, num=4, endpoint=False)\nprint(b)\nc = np.logspace(2.0, 3.0, num=4, base=2.0)\nprint(c)\n\n[ 100.          215.443469    464.15888336 1000.        ]\n[100.         177.827941   316.22776602 562.34132519]\n[4.         5.0396842  6.34960421 8.        ]\n\n\n\nnp.empty - pusta (niezaincjowana) tablica - konkretne wartości nie są “gwarantowane”\n\nimport numpy as np\n\na = np.empty(3)\nprint(a)\nb = np.empty(3, dtype=int)\nprint(b)\n\n[0. 1. 2.]\n[0 1 2]\n\n\nnp.identity - tablica przypominająca macierz jednostkową\nnp.eye - tablica z jedynkami na przekątnej (pozostałe zera)\n\nimport numpy as np\n\nprint(\"a\")\na = np.identity(4)\nprint(a)\nprint(\"b\")\nb = np.eye(4, k=1)\nprint(b)\nprint(\"c\")\nc = np.eye(4, k=2)\nprint(c)\nprint(\"d\")\nd = np.eye(4, k=-1)\nprint(d)\n\na\n[[1. 0. 0. 0.]\n [0. 1. 0. 0.]\n [0. 0. 1. 0.]\n [0. 0. 0. 1.]]\nb\n[[0. 1. 0. 0.]\n [0. 0. 1. 0.]\n [0. 0. 0. 1.]\n [0. 0. 0. 0.]]\nc\n[[0. 0. 1. 0.]\n [0. 0. 0. 1.]\n [0. 0. 0. 0.]\n [0. 0. 0. 0.]]\nd\n[[0. 0. 0. 0.]\n [1. 0. 0. 0.]\n [0. 1. 0. 0.]\n [0. 0. 1. 0.]]",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#indeksowanie-krojenie",
+    "href": "numpy.html#indeksowanie-krojenie",
+    "title": "2  NumPy",
+    "section": "2.6 Indeksowanie, “krojenie”",
+    "text": "2.6 Indeksowanie, “krojenie”\n\nimport numpy as np\n\na = np.array([2, 5, -2, 4, -7, 8, 9, 11, -23, -4, -7, 16, 1])\n1print(\"1:\", a[5])\n2print(\"2:\", a[-2])\n3print(\"3:\", a[3:6])\n4print(\"4:\", a[:])\n5print(\"5:\", a[0:-1])\n6print(\"6:\", a[:5])\n\n\n1\n\nDostęp do elementu o indeksie 5.\n\n2\n\nDostęp do elementu drugiego od tyłu.\n\n3\n\nDostęp do elementów o indeksach od 3 do 5 (włącznie) - zasada przedziałów lewostronnnie domkniętnych, prawostronnie otwartych.\n\n4\n\nDostęp do wszystkich elementów.\n\n5\n\nDostęp do wszystkich elementów z wyłączeniem ostatniego.\n\n6\n\nDostęp od początku do elementu o indeksie 4.\n\n\n\n\n1: 8\n2: 16\n3: [ 4 -7  8]\n4: [  2   5  -2   4  -7   8   9  11 -23  -4  -7  16   1]\n5: [  2   5  -2   4  -7   8   9  11 -23  -4  -7  16]\n6: [ 2  5 -2  4 -7]\n\n\n\nimport numpy as np\n\n1print(\"1:\", a[4:])\n2print(\"2:\", a[4:-1])\n3print(\"3:\", a[4:10:2])\n4print(\"4:\", a[::-1])\n5print(\"5:\", a[::2])\n6print(\"6:\", a[::-2])\n\n\n1\n\nDostęp do elementów od indeksu 4 do końca.\n\n2\n\nDostęp do elementów od indeksu 4 do końca bez ostatniego.\n\n3\n\nDostęp do elementów o indeksach stanowiących ciąg arytmetyczny od 4 do 10 (z czówrką, ale bez dziesiątki) z krokiem równym 2\n\n4\n\nDostęp do elementów od tyłu do początku.\n\n5\n\nDostęp do elementów o indeksach parzystych od początku.\n\n6\n\nDostęp do elementów o indeksach “nieparzystych ujemnych” od początku.\n\n\n\n\n1: [ -7   8   9  11 -23  -4  -7  16   1]\n2: [ -7   8   9  11 -23  -4  -7  16]\n3: [ -7   9 -23]\n4: [  1  16  -7  -4 -23  11   9   8  -7   4  -2   5   2]\n5: [  2  -2  -7   9 -23  -7   1]\n6: [  1  -7 -23   9  -7  -2   2]\n\n\n\nimport numpy as np\n\na = np.array([[3, 4, 5], [-3, 4, 8], [3, 2, 9]])\nb = a[:2, 1:]\nprint(b)\nprint(np.shape(b))\nc = a[1]\nprint(c)\nprint(np.shape(c))\nd = a[1, :]\nprint(d)\nprint(np.shape(d))\n\n[[4 5]\n [4 8]]\n(2, 2)\n[-3  4  8]\n(3,)\n[-3  4  8]\n(3,)\n\n\n\nimport numpy as np\n\na = np.array([[3, 4, 5], [-3, 4, 8], [3, 2, 9]])\ne = a[1:2, :]\nprint(e)\nprint(np.shape(e))\nf = a[:, :2]\nprint(f)\nprint(np.shape(f))\ng = a[1, :2]\nprint(g)\nprint(np.shape(g))\nh = a[1:2, :2]\nprint(h)\nprint(np.shape(h))\n\n[[-3  4  8]]\n(1, 3)\n[[ 3  4]\n [-3  4]\n [ 3  2]]\n(3, 2)\n[-3  4]\n(2,)\n[[-3  4]]\n(1, 2)\n\n\n**Uwaga - takie “krojenie” to tzw “widok”.\n\nimport numpy as np\n\na = np.array([[3, 4, 5], [-3, 4, 8], [3, 2, 9]])\nb = a[1:2, 1:]\nprint(b)\na[1][1] = 9\nprint(a)\nprint(b)\nb[0][0] = -11\nprint(a)\nprint(b)\n\n[[4 8]]\n[[ 3  4  5]\n [-3  9  8]\n [ 3  2  9]]\n[[9 8]]\n[[  3   4   5]\n [ -3 -11   8]\n [  3   2   9]]\n[[-11   8]]\n\n\nNaprawa:\n\nimport numpy as np\n\na = np.array([[3, 4, 5], [-3, 4, 8], [3, 2, 9]])\nb = a[1:2, 1:].copy()\nprint(b)\na[1][1] = 9\nprint(a)\nprint(b)\nb[0][0] = -11\nprint(a)\nprint(b)\n\n[[4 8]]\n[[ 3  4  5]\n [-3  9  8]\n [ 3  2  9]]\n[[4 8]]\n[[ 3  4  5]\n [-3  9  8]\n [ 3  2  9]]\n[[-11   8]]\n\n\nIndeksowanie logiczne (fancy indexing)\n\nimport numpy as np\n\na = np.array([2, 5, -2, 4, -7, 8, 9, 11, -23, -4, -7, 8, 1])\nb = a[np.array([1, 3, 7])]\nprint(b)\nc = a[[1, 3, 7]]\nprint(c)\n\n[ 5  4 11]\n[ 5  4 11]\n\n\n\nimport numpy as np\n\na = np.array([2, 5, -2, 4, -7, 8, 9, 11, -23, -4, -7, 8, 1])\nb = a &gt; 0\nprint(b)\nc = a[a &gt; 0]\nprint(c)\n\n[ True  True False  True False  True  True  True False False False  True\n  True]\n[ 2  5  4  8  9 11  8  1]\n\n\n\nimport numpy as np\n\na = np.array([2, 5, -2, 4, -7, 8, 9, 11, -23, -4, -7, 8, 1])\nb = a[a &gt; 0]\nprint(b)\nb[0] = -5\nprint(a)\nprint(b)\na[1] = 20\nprint(a)\nprint(b)\n\n[ 2  5  4  8  9 11  8  1]\n[  2   5  -2   4  -7   8   9  11 -23  -4  -7   8   1]\n[-5  5  4  8  9 11  8  1]\n[  2  20  -2   4  -7   8   9  11 -23  -4  -7   8   1]\n[-5  5  4  8  9 11  8  1]",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#modyfikacja-kształtu-i-rozmiaru",
+    "href": "numpy.html#modyfikacja-kształtu-i-rozmiaru",
+    "title": "2  NumPy",
+    "section": "2.7 Modyfikacja kształtu i rozmiaru",
+    "text": "2.7 Modyfikacja kształtu i rozmiaru\nhttps://numpy.org/doc/stable/reference/routines.array-manipulation.html\n\nimport numpy as np\n\nprint(\"a\")\na = np.array([[3, 4, 5], [-3, 4, 8], [3, 2, 9]])\nprint(a)\nprint(\"b\")\nb = np.reshape(a, (1, 9))\nprint(b)\nprint(\"c\")\nc = a.reshape(9)\nprint(c)\n\na\n[[ 3  4  5]\n [-3  4  8]\n [ 3  2  9]]\nb\n[[ 3  4  5 -3  4  8  3  2  9]]\nc\n[ 3  4  5 -3  4  8  3  2  9]\n\n\n\nimport numpy as np\n\nprint(\"a\")\na = np.array([[3, 4, 5], [-3, 4, 8], [3, 2, 9]])\nprint(a)\nprint(\"d\")\nd = a.flatten()\nprint(d)\nprint(\"e\")\ne = a.ravel()\nprint(e)\nprint(\"f\")\nf = np.ravel(a)\nprint(f)\n\na\n[[ 3  4  5]\n [-3  4  8]\n [ 3  2  9]]\nd\n[ 3  4  5 -3  4  8  3  2  9]\ne\n[ 3  4  5 -3  4  8  3  2  9]\nf\n[ 3  4  5 -3  4  8  3  2  9]\n\n\n\nimport numpy as np\n\nprint(\"g\")\ng = [[1, 3, 4]]\nprint(g)\nprint(\"h\")\nh = np.squeeze(g)\nprint(h)\nprint(\"i\")\ni = a.T\nprint(i)\nprint(\"j\")\nj = np.transpose(a)\nprint(j)\n\ng\n[[1, 3, 4]]\nh\n[1 3 4]\ni\n[[ 3 -3  3]\n [ 4  4  2]\n [ 5  8  9]]\nj\n[[ 3 -3  3]\n [ 4  4  2]\n [ 5  8  9]]\n\n\n\nimport numpy as np\n\nprint(\"h\")\nh = [3, -4, 5, -2]\nprint(h)\nprint(\"k\")\nk = np.hstack((h, h, h))\nprint(k)\nprint(\"l\")\nl = np.vstack((h, h, h))\nprint(l)\nprint(\"m\")\nm = np.dstack((h, h, h))\nprint(m)\n\nh\n[3, -4, 5, -2]\nk\n[ 3 -4  5 -2  3 -4  5 -2  3 -4  5 -2]\nl\n[[ 3 -4  5 -2]\n [ 3 -4  5 -2]\n [ 3 -4  5 -2]]\nm\n[[[ 3  3  3]\n  [-4 -4 -4]\n  [ 5  5  5]\n  [-2 -2 -2]]]\n\n\n\nimport numpy as np\n\na = np.array([[1, 2], [3, 4]])\nb = np.array([[5, 6]])\nprint(\"r1\")\nr1 = np.concatenate((a, b))\nprint(r1)\nprint(\"r2\")\nr2 = np.concatenate((a, b), axis=0)\nprint(r2)\nprint(\"r3\")\nr3 = np.concatenate((a, b.T), axis=1)\nprint(r3)\nprint(\"r4\")\nr4 = np.concatenate((a, b), axis=None)\nprint(r4)\n\nr1\n[[1 2]\n [3 4]\n [5 6]]\nr2\n[[1 2]\n [3 4]\n [5 6]]\nr3\n[[1 2 5]\n [3 4 6]]\nr4\n[1 2 3 4 5 6]\n\n\n\nimport numpy as np\n\na = np.array([[1, 2], [3, 4]])\nprint(\"r1\")\nr1 = np.resize(a, (2, 3))\nprint(r1)\nprint(\"r2\")\nr2 = np.resize(a, (1, 4))\nprint(r2)\nprint(\"r3\")\nr3 = np.resize(a, (2, 4))\nprint(r3)\n\nr1\n[[1 2 3]\n [4 1 2]]\nr2\n[[1 2 3 4]]\nr3\n[[1 2 3 4]\n [1 2 3 4]]\n\n\n\nimport numpy as np\n\na = np.array([[1, 2], [3, 4]])\nb = np.array([[5, 6]])\nprint(\"r1\")\nr1 = np.append(a, b)\nprint(r1)\nprint(\"r2\")\nr2 = np.append(a, b, axis=0)\nprint(r2)\n\nr1\n[1 2 3 4 5 6]\nr2\n[[1 2]\n [3 4]\n [5 6]]\n\n\n\nimport numpy as np\n\na = np.array([[1, 2], [3, 7]])\nprint(\"r1\")\nr1 = np.insert(a, 1, 4)\nprint(r1)\nprint(\"r2\")\nr2 = np.insert(a, 2, 4)\nprint(r2)\nprint(\"r3\")\nr3 = np.insert(a, 1, 4, axis=0)\nprint(r3)\nprint(\"r4\")\nr4 = np.insert(a, 1, 4, axis=1)\nprint(r4)\n\nr1\n[1 4 2 3 7]\nr2\n[1 2 4 3 7]\nr3\n[[1 2]\n [4 4]\n [3 7]]\nr4\n[[1 4 2]\n [3 4 7]]\n\n\n\nimport numpy as np\n\na = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])\nprint(\"r1\")\nr1 = np.delete(a, 1, axis=1)\nprint(r1)\nprint(\"r2\")\nr2 = np.delete(a, 2, axis=0)\nprint(r2)\n\nr1\n[[ 1  3  4]\n [ 5  7  8]\n [ 9 11 12]]\nr2\n[[1 2 3 4]\n [5 6 7 8]]",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#broadcasting",
+    "href": "numpy.html#broadcasting",
+    "title": "2  NumPy",
+    "section": "2.8 Broadcasting",
+    "text": "2.8 Broadcasting\nRozważane warianty są przykładowe.\nWariant 1 - skalar-tablica - wykonanie operacji na każdym elemencie tablicy\n\nimport numpy as np\n\na = np.array([[1, 2], [5, 6], [9, 10]])\nb = a + 4\nprint(b)\nc = 2 ** a\nprint(c)\n\n[[ 5  6]\n [ 9 10]\n [13 14]]\n[[   2    4]\n [  32   64]\n [ 512 1024]]\n\n\n\nWariant 2 - dwie tablice - “gdy jedna z tablic może być rozszerzona” (oba wymiary są równe lub jeden z nich jest równy 1)\nhttps://numpy.org/doc/stable/user/basics.broadcasting.html\n\nimport numpy as np\n\na = np.array([[1, 2], [5, 6]])\nb = np.array([9, 2])\nr1 = a + b\nprint(r1)\nr2 = a / b\nprint(r2)\nc = np.array([[4], [-2]])\nr3 = a + c\nprint(r3)\nr4 = c / a\nprint(r4)\n\n[[10  4]\n [14  8]]\n[[0.11111111 1.        ]\n [0.55555556 3.        ]]\n[[5 6]\n [3 4]]\n[[ 4.          2.        ]\n [-0.4        -0.33333333]]\n\n\n\nWariant 3 - “kolumna” i “wiersz”\n\nimport numpy as np\n\na = np.array([[5, 2, -3]]).T\nb = np.array([3, -2, 1, 2, 4])\nprint(a+b)\nprint(b+a)\nprint(a*b)\n\n[[ 8  3  6  7  9]\n [ 5  0  3  4  6]\n [ 0 -5 -2 -1  1]]\n[[ 8  3  6  7  9]\n [ 5  0  3  4  6]\n [ 0 -5 -2 -1  1]]\n[[ 15 -10   5  10  20]\n [  6  -4   2   4   8]\n [ -9   6  -3  -6 -12]]",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#funkcje-uniwersalne",
+    "href": "numpy.html#funkcje-uniwersalne",
+    "title": "2  NumPy",
+    "section": "2.9 Funkcje uniwersalne",
+    "text": "2.9 Funkcje uniwersalne\nhttps://numpy.org/doc/stable/reference/ufuncs.html#methods",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#statystyka-i-agregacja",
+    "href": "numpy.html#statystyka-i-agregacja",
+    "title": "2  NumPy",
+    "section": "2.10 Statystyka i agregacja",
+    "text": "2.10 Statystyka i agregacja\n\n\n\n\n\n\n\nFunkcja\nOpis\n\n\n\n\nnp.mean\nŚrednia wszystkich wartości w tablicy.\n\n\nnp.std\nOdchylenie standardowe.\n\n\nnp.var\nWariancja.\n\n\nnp.sum\nSuma wszystkich elementów.\n\n\nnp.prod\nIloczyn wszystkich elementów.\n\n\nnp.cumsum\nSkumulowana suma wszystkich elementów.\n\n\nnp.cumprod\nSkumulowany iloczyn wszystkich elementów.\n\n\nnp.min,np.max\nMinimalna/maksymalna wartość w tablicy.\n\n\nnp.argmin, np.argmax\nIndeks minimalnej/maksymalnej wartości w tablicy.\n\n\nnp.all\nSprawdza czy wszystki elementy są różne od zera.\n\n\nnp.any\nSprawdza czy co najmniej jeden z elementów jest różny od zera.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#wyrażenia-warunkowe",
+    "href": "numpy.html#wyrażenia-warunkowe",
+    "title": "2  NumPy",
+    "section": "2.11 Wyrażenia warunkowe",
+    "text": "2.11 Wyrażenia warunkowe\nhttps://numpy.org/doc/stable/reference/generated/numpy.where https://numpy.org/doc/stable/reference/generated/numpy.choose https://numpy.org/doc/stable/reference/generated/numpy.select https://numpy.org/doc/stable/reference/generated/numpy.nonzero",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#działania-na-zbiorach",
+    "href": "numpy.html#działania-na-zbiorach",
+    "title": "2  NumPy",
+    "section": "2.12 Działania na zbiorach",
+    "text": "2.12 Działania na zbiorach\nhttps://numpy.org/doc/stable/reference/routines.set.html",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#operacje-tablicowe",
+    "href": "numpy.html#operacje-tablicowe",
+    "title": "2  NumPy",
+    "section": "2.13 Operacje tablicowe",
+    "text": "2.13 Operacje tablicowe\nhttps://numpy.org/doc/stable/reference/generated/numpy.transpose\nhttps://numpy.org/doc/stable/reference/generated/numpy.flip https://numpy.org/doc/stable/reference/generated/numpy.fliplr https://numpy.org/doc/stable/reference/generated/numpy.flipud\nhttps://numpy.org/doc/stable/reference/generated/numpy.sort",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#alegbra-liniowa",
+    "href": "numpy.html#alegbra-liniowa",
+    "title": "2  NumPy",
+    "section": "2.14 Alegbra liniowa",
+    "text": "2.14 Alegbra liniowa\nhttps://numpy.org/doc/stable/reference/routines.linalg.html",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#funkcja-na-stringach",
+    "href": "numpy.html#funkcja-na-stringach",
+    "title": "2  NumPy",
+    "section": "2.15 Funkcja na stringach",
+    "text": "2.15 Funkcja na stringach\nhttps://numpy.org/doc/stable/reference/routines.char.html",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#data-i-czas",
+    "href": "numpy.html#data-i-czas",
+    "title": "2  NumPy",
+    "section": "2.16 Data i czas",
+    "text": "2.16 Data i czas\nhttps://numpy.org/doc/stable/reference/arrays.datetime.html",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy.html#pseudolosowe",
+    "href": "numpy.html#pseudolosowe",
+    "title": "2  NumPy",
+    "section": "2.17 Pseudolosowe",
+    "text": "2.17 Pseudolosowe\nhttps://numpy.org/doc/stable/reference/random/index.html\nBibliografia:\n\nDokumentacja biblioteki, https://numpy.org/doc/stable/, dostęp online 5.03.2021.\nRobert Jahansson, Matematyczny Python. Obliczenia naukowe i analiza danych z użyciem NumPy, SciPy i Matplotlib, Wyd. Helion, 2021.\nhttps://www.tutorialspoint.com/numpy/index.htm, dostęp online 20.03.2019.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  }
+]

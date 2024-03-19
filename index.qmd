@@ -1,0 +1,8 @@
+# Wizualizacja Danych 2024
+
+Materiały na semestr letni - rok akademicki 2023/24.
+
+---
+nocite: |
+  @*
+---
