@@ -8,6 +8,7 @@ book:
   cover-image: wd.jpg
   chapters:
     - index.qmd
+    - trocheteorii.qmd
     - numpy.qmd
   downloads: pdf
   repo-url: https://github.com/pjastr/wd2024uwm

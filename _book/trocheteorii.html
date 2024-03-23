@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.550">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Wizualizacja Danych 2024 - 2&nbsp; Trochę teorii…</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./numpy.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Brak wyników",
+    "search-matching-documents-text": "dopasowane dokumenty",
+    "search-copy-link-title": "Kopiuj link do wyszukiwania",
+    "search-hide-matches-text": "Ukryj dodatkowe dopasowania",
+    "search-more-match-text": "więcej dopasowań w tym dokumencie",
+    "search-more-matches-text": "więcej dopasowań w tym dokumencie",
+    "search-clear-button-title": "Wyczyść",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Anuluj",
+    "search-submit-button-title": "Zatwierdź",
+    "search-label": "Szukaj"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./trocheteorii.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Trochę teorii…</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Przełącz pasek boczny" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Wizualizacja Danych 2024</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/pjastr/wd2024uwm" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Wizualizacja-Danych-2024.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Przełącz tryb ciemny"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Szukaj"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Wizualizacja Danych 2024</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./trocheteorii.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Trochę teorii…</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./numpy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">NumPy</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Spis treści</h2>
+   
+  <ul>
+  <li><a href="#test-racjonalnego-myślenia" id="toc-test-racjonalnego-myślenia" class="nav-link active" data-scroll-target="#test-racjonalnego-myślenia"><span class="header-section-number">2.1</span> Test racjonalnego myślenia</a></li>
+  <li><a href="#analiza-danych---podstawowe-pojęcia" id="toc-analiza-danych---podstawowe-pojęcia" class="nav-link" data-scroll-target="#analiza-danych---podstawowe-pojęcia"><span class="header-section-number">2.2</span> Analiza danych - podstawowe pojęcia</a>
+  <ul class="collapse">
+  <li><a href="#współczesne-znaczenia-słowa-statystyka" id="toc-współczesne-znaczenia-słowa-statystyka" class="nav-link" data-scroll-target="#współczesne-znaczenia-słowa-statystyka"><span class="header-section-number">2.2.1</span> Współczesne znaczenia słowa “statystyka”:</a></li>
+  <li><a href="#masowość" id="toc-masowość" class="nav-link" data-scroll-target="#masowość"><span class="header-section-number">2.2.2</span> “Masowość”</a></li>
+  <li><a href="#podział-statystyki" id="toc-podział-statystyki" class="nav-link" data-scroll-target="#podział-statystyki"><span class="header-section-number">2.2.3</span> Podział statystyki</a></li>
+  <li><a href="#zbiorowośćpopulacja" id="toc-zbiorowośćpopulacja" class="nav-link" data-scroll-target="#zbiorowośćpopulacja"><span class="header-section-number">2.2.4</span> Zbiorowość/populacja</a></li>
+  <li><a href="#jednostka-statyczna" id="toc-jednostka-statyczna" class="nav-link" data-scroll-target="#jednostka-statyczna"><span class="header-section-number">2.2.5</span> Jednostka statyczna</a></li>
+  <li><a href="#cechy-statystyczne" id="toc-cechy-statystyczne" class="nav-link" data-scroll-target="#cechy-statystyczne"><span class="header-section-number">2.2.6</span> Cechy statystyczne</a></li>
+  <li><a href="#skale" id="toc-skale" class="nav-link" data-scroll-target="#skale"><span class="header-section-number">2.2.7</span> Skale</a></li>
+  </ul></li>
+  <li><a href="#rodzaje-badań-statystycznych" id="toc-rodzaje-badań-statystycznych" class="nav-link" data-scroll-target="#rodzaje-badań-statystycznych"><span class="header-section-number">2.3</span> Rodzaje badań statystycznych</a></li>
+  <li><a href="#etapy-badania-statystycznego" id="toc-etapy-badania-statystycznego" class="nav-link" data-scroll-target="#etapy-badania-statystycznego"><span class="header-section-number">2.4</span> Etapy badania statystycznego</a></li>
+  <li><a href="#analiza-danych-zastanych" id="toc-analiza-danych-zastanych" class="nav-link" data-scroll-target="#analiza-danych-zastanych"><span class="header-section-number">2.5</span> Analiza danych zastanych</a></li>
+  <li><a href="#proces-analizy-danych" id="toc-proces-analizy-danych" class="nav-link" data-scroll-target="#proces-analizy-danych"><span class="header-section-number">2.6</span> Proces analizy danych</a>
+  <ul class="collapse">
+  <li><a href="#zdefiniowanie-wymagań" id="toc-zdefiniowanie-wymagań" class="nav-link" data-scroll-target="#zdefiniowanie-wymagań"><span class="header-section-number">2.6.1</span> Zdefiniowanie wymagań</a></li>
+  <li><a href="#gromadzenie-danych" id="toc-gromadzenie-danych" class="nav-link" data-scroll-target="#gromadzenie-danych"><span class="header-section-number">2.6.2</span> Gromadzenie danych</a></li>
+  <li><a href="#przetwarzanie-danych" id="toc-przetwarzanie-danych" class="nav-link" data-scroll-target="#przetwarzanie-danych"><span class="header-section-number">2.6.3</span> Przetwarzanie danych</a></li>
+  <li><a href="#właściwa-analiza-danych" id="toc-właściwa-analiza-danych" class="nav-link" data-scroll-target="#właściwa-analiza-danych"><span class="header-section-number">2.6.4</span> Właściwa analiza danych</a></li>
+  <li><a href="#raportowanie-i-dystrybucja-wyników" id="toc-raportowanie-i-dystrybucja-wyników" class="nav-link" data-scroll-target="#raportowanie-i-dystrybucja-wyników"><span class="header-section-number">2.6.5</span> Raportowanie i dystrybucja wyników</a></li>
+  </ul></li>
+  <li><a href="#skąd-brać-dane" id="toc-skąd-brać-dane" class="nav-link" data-scroll-target="#skąd-brać-dane"><span class="header-section-number">2.7</span> Skąd brać dane?</a></li>
+  <li><a href="#koncepcja-tidy-data" id="toc-koncepcja-tidy-data" class="nav-link" data-scroll-target="#koncepcja-tidy-data"><span class="header-section-number">2.8</span> Koncepcja “Tidy data”</a>
+  <ul class="collapse">
+  <li><a href="#zasady-czystych-danych" id="toc-zasady-czystych-danych" class="nav-link" data-scroll-target="#zasady-czystych-danych"><span class="header-section-number">2.8.1</span> Zasady “czystych danych”</a></li>
+  <li><a href="#przykłady-nieuporządkowanych-danych" id="toc-przykłady-nieuporządkowanych-danych" class="nav-link" data-scroll-target="#przykłady-nieuporządkowanych-danych"><span class="header-section-number">2.8.2</span> Przykłady nieuporządkowanych danych</a></li>
+  <li><a href="#długie-czy-szerokie-dane" id="toc-długie-czy-szerokie-dane" class="nav-link" data-scroll-target="#długie-czy-szerokie-dane"><span class="header-section-number">2.8.3</span> Długie czy szerokie dane?</a></li>
+  </ul></li>
+  <li><a href="#parę-rad-na-dobre-prezentacje" id="toc-parę-rad-na-dobre-prezentacje" class="nav-link" data-scroll-target="#parę-rad-na-dobre-prezentacje"><span class="header-section-number">2.9</span> Parę rad na dobre prezentacje</a>
+  <ul class="collapse">
+  <li><a href="#współczynnik-kłamstwa" id="toc-współczynnik-kłamstwa" class="nav-link" data-scroll-target="#współczynnik-kłamstwa"><span class="header-section-number">2.9.1</span> Współczynnik kłamstwa</a></li>
+  <li><a href="#współczynnik-kłamstwa-1" id="toc-współczynnik-kłamstwa-1" class="nav-link" data-scroll-target="#współczynnik-kłamstwa-1"><span class="header-section-number">2.9.2</span> Współczynnik kłamstwa</a></li>
+  </ul></li>
+  <li><a href="#jak-tworzyć" id="toc-jak-tworzyć" class="nav-link" data-scroll-target="#jak-tworzyć"><span class="header-section-number">2.10</span> Jak tworzyć?</a></li>
+  <li><a href="#bibliografia" id="toc-bibliografia" class="nav-link" data-scroll-target="#bibliografia"><span class="header-section-number">2.11</span> Bibliografia</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/pjastr/wd2024uwm/issues/new" class="toc-action"><i class="bi bi-github"></i>Zgłoś problem</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Trochę teorii…</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="test-racjonalnego-myślenia" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="test-racjonalnego-myślenia"><span class="header-section-number">2.1</span> Test racjonalnego myślenia</h2>
+<ul>
+<li>Jeśli 5 maszyn w ciągu 5 minut produkuje 5 urządzeń, ile czasu zajmie 100 maszynom zrobienie 100 urządzeń?</li>
+<li>Na stawie rozrasta się kępa lilii wodnych. Codziennie kępa staje się dwukrotnie większa. Jeśli zarośnięcie całego stawu zajmie liliom 48 dni, to ile dni potrzeba, żeby zarosły połowę stawu?</li>
+<li>Kij bejsbolowy i piłka kosztują razem 1 dolar i 10 centów. Kij kosztuje o dolara więcej niż piłka. Ile kosztuje piłka?</li>
+</ul>
+<hr>
+<p><strong>Wizualizacja</strong> – ogólna nazwa graficznych metod tworzenia, analizy i przekazywania informacji. Za pomocą środków wizualnych ludzie wymieniają się zarówno ideami abstrakcyjnymi, jak i komunikatami mającymi bezpośrednie oparcie w rzeczywistości. W dzisiejszych czasach wizualizacja wpływa na sposób prowadzenia badań naukowych, jest rutynowo wykorzystywana w dyscyplinach technicznych i medycynie, służy celom dydaktycznym, a także bywa pojmowana jako środek wyrazu artystycznego.</p>
+</section>
+<section id="analiza-danych---podstawowe-pojęcia" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="analiza-danych---podstawowe-pojęcia"><span class="header-section-number">2.2</span> Analiza danych - podstawowe pojęcia</h2>
+<section id="współczesne-znaczenia-słowa-statystyka" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="współczesne-znaczenia-słowa-statystyka"><span class="header-section-number">2.2.1</span> Współczesne znaczenia słowa “statystyka”:</h3>
+<ul>
+<li>zbiór danych liczbowych pokazujący kształtowanie procesów i zjawisk np. statystyka ludności.</li>
+<li>wszelkie czynności związane z gromadzeniem i opracowywaniem danych liczbowych np. statystyka pewnego problemu dokonywana przez GUS.</li>
+<li>charakterystyki liczbowe np. statystyki próby np. średnia arytmetyczna, odchylenie standardowe itp.</li>
+<li>dyscyplina naukowa - nauka o metodach badania zjawisk masowych.</li>
+</ul>
+</section>
+<section id="masowość" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="masowość"><span class="header-section-number">2.2.2</span> “Masowość”</h3>
+<p>Zjawiska/procesy masowe - badaniu podlega duża liczba jednostek. Dzielą się na:</p>
+<ul>
+<li>gospodarcze (np. produkcja, konsumpcja, usługi reklama),</li>
+<li>społeczne (np. wypadki drogowe, poglądy polityczne),</li>
+<li>demograficzne (np. urodzenia, starzenie, migracje).</li>
+</ul>
+</section>
+<section id="podział-statystyki" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="podział-statystyki"><span class="header-section-number">2.2.3</span> Podział statystyki</h3>
+<p>Statystyka - dyscyplina naukowa - podział:</p>
+<ul>
+<li>statystyka opisowa - zajmuje się sprawami związanymi z gromadzeniem, prezentacją, analizą i interpretacją danych liczbowych. Obserwacja obejmuje całą badaną zbiorowość.</li>
+<li>statystyka matematyczna - uogólnienie wyników badania części zbiorowości (próby) na całą zbiorowość.</li>
+</ul>
+</section>
+<section id="zbiorowośćpopulacja" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="zbiorowośćpopulacja"><span class="header-section-number">2.2.4</span> Zbiorowość/populacja</h3>
+<p>Zbiorowość statystyczna, populacja statystyczna: zbiór obiektów podlegających badaniu statystycznemu. Tworzą je jednostki podobne do siebie, logicznie powiązane, lecz nie identyczne. Mają pewne cechy wspólne oraz pewne właściwości pozwalające je różnicować.</p>
+<ul>
+<li>przykłady:
+<ul>
+<li>badanie wzrostu Polaków - mieszkańcy Polski</li>
+<li>poziom nauczania w szkołach woj. warmińsko-mazurskiego - szkoły woj. warmińsko-mazurskiego.</li>
+</ul></li>
+<li>podział:
+<ul>
+<li>zbiorowość/populacja generalna - obejmuje całość,</li>
+<li>zbiorowość/populacja próbna (próba) - obejmuje część populacji.</li>
+</ul></li>
+</ul>
+</section>
+<section id="jednostka-statyczna" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="jednostka-statyczna"><span class="header-section-number">2.2.5</span> Jednostka statyczna</h3>
+<p>Jednostka statystyczna: każdy z elementów zbiorowości statystycznej.</p>
+<ul>
+<li>przykłady:
+<ul>
+<li>studenci UWM - student UWM</li>
+<li>mieszkańcy Polski - każda osoba mieszkająca w Polsce</li>
+<li>maszyny produkowane w fabryce - każda maszyna</li>
+</ul></li>
+</ul>
+</section>
+<section id="cechy-statystyczne" class="level3" data-number="2.2.6">
+<h3 data-number="2.2.6" class="anchored" data-anchor-id="cechy-statystyczne"><span class="header-section-number">2.2.6</span> Cechy statystyczne</h3>
+<p>Cechy statystyczne</p>
+<ul>
+<li>właściwości charakteryzujące jednostki statystyczne w danej zbiorowości statystycznej.</li>
+<li>dzielimy je na stałe i zmienne.</li>
+</ul>
+<p>Cechy stałe</p>
+<ul>
+<li>takie właściwości, które są wspólne wszystkim jednostkom danej zbiorowości statystycznej.</li>
+<li>podział:
+<ul>
+<li>rzeczowe - kto lub co jest przedmiotem badania statystycznego,</li>
+<li>czasowe - kiedy zostało przeprowadzone badanie lub jakiego okresu czasu dotyczy badanie,</li>
+<li>przestrzenne - jakiego terytorium (miejsce lub obszar) dotyczy badanie.</li>
+</ul></li>
+<li>przykład: studenci WMiI UWM w Olsztynie w roku akad. 2017/2018:
+<ul>
+<li>cecha rzeczowa: posiadanie legitymacji studenckiej,</li>
+<li>cecha czasowa - studenci studiujący w roku akad. 2017/2018</li>
+<li>cecha przestrzenna - miejsce: WMiI UWM w Olsztynie.</li>
+</ul></li>
+</ul>
+<p>Cechy zmienne</p>
+<ul>
+<li>właściwości różnicujące jednostki statystyczne w danej zbiorowości.</li>
+<li>przykład: studenci UWM - cechy zmienne: wiek, płeć, rodzaj ukończonej szkoły średniej, kolor oczu, wzrost.</li>
+</ul>
+<p>Ważne:</p>
+<ul>
+<li>obserwacji podlegają tylko cechy zmienne,</li>
+<li>cecha stała w jednej zbiorowości może być cechą zmienną w innej zbiorowości.</li>
+</ul>
+<p>Przykład: studenci UWM mają legitymację wydaną przez UWM. Studenci wszystkich uczelni w Polsce mają legitymacje wydane przez różne szkoły.</p>
+<p><strong>Podział cech zmiennych:</strong></p>
+<ul>
+<li>cechy mierzalne (ilościowe) - można je wyrazić liczbą wraz z określoną jednostką miary.</li>
+<li>cechy niemierzalne (jakościowe) - określane słownie, reprezentują pewne kategorie.</li>
+</ul>
+<p>Przykład: zbiorowość studentów. Cechy mierzalne: wiek, waga, wzrost, liczba nieobecności. Cechy niemierzalne: płeć, kolor oczu, kierunek studiów.</p>
+<p>Często ze względów praktycznych cechom niemierzalnym przypisywane są kody liczbowe. Nie należy ich jednak mylić z cechami mierzalnymi. Np. 1 - wykształcenie podstawowe, 2 - wykształcenie zasadnicze, itd…</p>
+<p><strong>Podział cech mierzalnych:</strong></p>
+<ul>
+<li>ciągłe - mogące przybrać każdą wartość z określonego przedziału, np. wzrost, wiek, powierzchnia mieszkania.</li>
+<li>skokowe - mogące przyjmować konkretne (dyskretne) wartości liczbowe bez wartości pośrednich np. liczba osób w gospodarstwie domowych, liczba osób zatrudnionych w danej firmie.</li>
+</ul>
+<p>Cechy skokowe zazwyczaj mają wartości całkowite choć nie zawsze jest to wymagane np. liczba etatów w firmie (z uwzględnieniem części etatów).</p>
+</section>
+<section id="skale" class="level3" data-number="2.2.7">
+<h3 data-number="2.2.7" class="anchored" data-anchor-id="skale"><span class="header-section-number">2.2.7</span> Skale</h3>
+<p><strong>Skala pomiarowa</strong></p>
+<ul>
+<li>to system, pozwalający w pewien sposób usystematyzować wyniki pomiarów statystycznych.</li>
+<li>podział:
+<ul>
+<li>skala nominalna,</li>
+<li>skala porządkowa,</li>
+<li>skala przedziałowa (interwałowa),</li>
+<li>skala ilorazowa (stosunkowa).</li>
+</ul></li>
+</ul>
+<p><strong>Skala nominalna</strong></p>
+<ul>
+<li>skala, w której klasyfikujemy jednostkę statystyczną do określonej kategorii.</li>
+<li>wartość w tej skali nie ma żadnego uporządkowana.</li>
+<li>przykład:</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Religia</th>
+<th>Kod</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Chrześcijaństwo</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Islam</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Buddyzm</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Skala porządkowa</strong></p>
+<ul>
+<li>wartości mają jasno określony porządek, ale nie są dane odległości między nimi,</li>
+<li>pozwala na uszeregowanie elementów.</li>
+<li>przykłady:</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Wykształcenie</th>
+<th>Kod</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Podstawowe</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Średnie</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Wyższe</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Dochód</th>
+<th>Kod</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Niski</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Średni</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Wysoki</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Skala przedziałowa (interwałowa)</strong></p>
+<ul>
+<li>wartości cechy wyrażone są poprzez konkretne wartości liczbowe,</li>
+<li>pozwala na porównywanie jednostek (coś jest większe lub mniejsze),</li>
+<li>nie możliwe jest badanie ilorazów (określenie ile razy dana wartość jest większa lub mniejsza od drugiej).</li>
+<li>przykład:</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Miasto</th>
+<th>Temperatura w <span class="math inline">\(^{\circ}C\)</span></th>
+<th>Temperatura w <span class="math inline">\(^{\circ}F\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Warszawa</td>
+<td>15</td>
+<td>59</td>
+</tr>
+<tr class="even">
+<td>Olsztyn</td>
+<td>10</td>
+<td>50</td>
+</tr>
+<tr class="odd">
+<td>Gdańsk</td>
+<td>5</td>
+<td>41</td>
+</tr>
+<tr class="even">
+<td>Szczecin</td>
+<td>20</td>
+<td>68</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Skala ilorazowa (stosunkowa)</strong></p>
+<ul>
+<li>wartości wyrażone są przez wartości liczbowe,</li>
+<li>możliwe określenie jest relacji mniejsza lub większa między wartościami,</li>
+<li>możliwe jest określenie stosunku (ilorazu) między wartościami,</li>
+<li>występuje zero absolutne.</li>
+<li>przykład:</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Produkt</th>
+<th>Cena w zł</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Chleb</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>Masło</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>Gruszki</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="rodzaje-badań-statystycznych" class="level2 smaller" data-number="2.3">
+<h2 class="smaller anchored" data-number="2.3" data-anchor-id="rodzaje-badań-statystycznych"><span class="header-section-number">2.3</span> Rodzaje badań statystycznych</h2>
+<ul>
+<li>badanie pełne - obejmują wszystkie jednostki zbiorowości statystycznej.
+<ul>
+<li>spis statystyczny,</li>
+<li>rejestracja bieżąca,</li>
+<li>sprawozdawczość statystyczna.</li>
+</ul></li>
+<li>badania częściowe - obserwowana jest część populacji. Przeprowadza się wtedy gdy badanie pełne jest niecelowe lub niemożliwe.
+<ul>
+<li>metoda monograficzna,</li>
+<li>metoda reprezentacyjna.</li>
+</ul></li>
+</ul>
+</section>
+<section id="etapy-badania-statystycznego" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="etapy-badania-statystycznego"><span class="header-section-number">2.4</span> Etapy badania statystycznego</h2>
+<ul>
+<li>projektowanie i organizacja badania: ustalenie celu, podmiotu, przedmiotu, zakresu, źródła i czasu trwania badania;</li>
+<li>obserwacja statystyczna;</li>
+<li>opracowanie materiału statystycznego: kontrola materiału statystycznego, grupowanie uzyskanych danych, prezentacja wyników danych;</li>
+<li>analiza statystyczna.</li>
+</ul>
+</section>
+<section id="analiza-danych-zastanych" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="analiza-danych-zastanych"><span class="header-section-number">2.5</span> Analiza danych zastanych</h2>
+<p>Analiza danych zastanych – proces przetwarzania danych w celu uzyskania na ich podstawie użytecznych informacji i wniosków. W zależności od rodzaju danych i stawianych problemów, może to oznaczać użycie metod statystycznych, eksploracyjnych i innych.</p>
+<p>Korzystanie z danych zastanych jest przykładem badań niereaktywnych - metod badań zachowań społecznych, które nie wpływają na te zachowania. Dane takie to: dokumenty, archiwa, sprawozdania, kroniki, spisy ludności, księgi parafialne, dzienniki, pamiętniki, blogi internetowe, audio-pamiętniki, archiwa historii mówionej i inne. (Wikipedia)</p>
+<p>Dane zastane możemy podzielić ze względu na (Makowska red. 2013):</p>
+<ul>
+<li>Charakter: Ilościowe, Jakościowe</li>
+<li>Formę: Dane opracowane, Dane surowe</li>
+<li>Sposób powstania: Pierwotne, Wtórne</li>
+<li>Dynamikę: Ciągła rejestracja zdarzeń, Rejestracja w interwałach czasowych, Rejestracja jednorazowa</li>
+<li>Poziom obiektywizmu: Obiektywne, Subiektywne</li>
+<li>Źródła pochodzenia: Dane publiczne, Dane prywatne</li>
+</ul>
+<p>Analiza danych to proces polegający na sprawdzaniu, porządkowaniu, przekształcaniu i modelowaniu danych w celu zdobycia użytecznych informacji, wypracowania wniosków i wspierania procesu decyzyjnego. Analiza danych ma wiele aspektów i podejść, obejmujących różne techniki pod różnymi nazwami, w różnych obszarach biznesowych, naukowych i społecznych. Praktyczne podejście do definiowania danych polega na tym, że dane to liczby, znaki, obrazy lub inne metody zapisu, w formie, którą można ocenić w celu określenia lub podjęcia decyzji o konkretnym działaniu. Wiele osób uważa, że dane same w sobie nie mają znaczenia – dopiero dane przetworzone i zinterpretowane stają się informacją.</p>
+</section>
+<section id="proces-analizy-danych" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="proces-analizy-danych"><span class="header-section-number">2.6</span> Proces analizy danych</h2>
+<p>Analiza odnosi się do rozbicia całości posiadanych informacji na jej odrębne komponenty w celu indywidualnego badania. Analiza danych to proces uzyskiwania nieprzetworzonych danych i przekształcania ich w informacje przydatne do podejmowania decyzji przez użytkowników. Dane są zbierane i analizowane, aby odpowiadać na pytania, testować hipotezy lub obalać teorie. Istnieje kilka faz, które można wyszczególnić w procesie analizy danych. Fazy są iteracyjne, ponieważ informacje zwrotne z faz kolejnych mogą spowodować dodatkową pracę w fazach wcześniejszych.</p>
+<section id="zdefiniowanie-wymagań" class="level3 smaller" data-number="2.6.1">
+<h3 class="smaller anchored" data-number="2.6.1" data-anchor-id="zdefiniowanie-wymagań"><span class="header-section-number">2.6.1</span> Zdefiniowanie wymagań</h3>
+<p>Przed przystąpieniem do analizy danych, należy dokładnie określić wymagania jakościowe dotyczące danych. Dane wejściowe, które mają być przedmiotem analizy, są określone na podstawie wymagań osób kierujących analizą lub klientów (którzy będą używać finalnego produktu analizy). Ogólny typ jednostki, na podstawie której dane będą zbierane, jest określany jako jednostka eksperymentalna (np. osoba lub populacja ludzi. Dane mogą być liczbowe lub kategoryczne (tj. Etykiety tekstowe). Faza definiowania wymagań powinna dać odpowiedź na 2 zasadnicze pytania:</p>
+<ul>
+<li>co chcemy zmierzyć?</li>
+<li>w jaki sposób chcemy to zmierzyć?</li>
+</ul>
+</section>
+<section id="gromadzenie-danych" class="level3" data-number="2.6.2">
+<h3 data-number="2.6.2" class="anchored" data-anchor-id="gromadzenie-danych"><span class="header-section-number">2.6.2</span> Gromadzenie danych</h3>
+<p>Dane są gromadzone z różnych źródeł. Wymogi, co do rodzaju i jakości danych mogą być przekazywane przez analityków do “opiekunów danych”, takich jak personel technologii informacyjnych w organizacji. Dane ponadto mogą być również gromadzone automatycznie z różnego rodzaju czujników znajdujących się w otoczeniu - takich jak kamery drogowe, satelity, urządzenia rejestrujące obraz, dźwięk oraz parametry fizyczne. Kolejną metodą jest również pozyskiwanie danych w drodze wywiadów, gromadzenie ze źródeł internetowych lub bezpośrednio z dokumentacji.</p>
+</section>
+<section id="przetwarzanie-danych" class="level3 smaller" data-number="2.6.3">
+<h3 class="smaller anchored" data-number="2.6.3" data-anchor-id="przetwarzanie-danych"><span class="header-section-number">2.6.3</span> Przetwarzanie danych</h3>
+<p>Zgromadzone dane muszą zostać przetworzone lub zorganizowane w sposób logiczny do analizy. Na przykład, mogą one zostać umieszczone w tabelach w celu dalszej analizy - w arkuszu kalkulacyjnym lub innym oprogramowaniu. Oczyszczanie danych Po fazie przetworzenia i uporządkowania, dane mogą być niekompletne, zawierać duplikaty lub zawierać błędy. Konieczność czyszczenia danych wynika z problemów związanych z wprowadzaniem i przechowywaniem danych. Czyszczenie danych to proces zapobiegania powstawaniu i korygowania wykrytych błędów. Typowe zadania obejmują dopasowywanie rekordów, identyfikowanie nieścisłości, ogólny przegląd jakość istniejących danych, usuwanie duplikatów i segmentację kolumn. Niezwykłe istotne jest też zwracanie uwagi na dane których wartości są powyżej lub poniżej ustalonych wcześniej progów (ekstrema).</p>
+</section>
+<section id="właściwa-analiza-danych" class="level3 smaller" data-number="2.6.4">
+<h3 class="smaller anchored" data-number="2.6.4" data-anchor-id="właściwa-analiza-danych"><span class="header-section-number">2.6.4</span> Właściwa analiza danych</h3>
+<p>Istnieje kilka metod, które można wykorzystać do tego celu, na przykład data mining, business intelligence, wizualizacja danych lub badania eksploracyjne. Ta ostatnia metoda jest sposobem analizowania zbiorów informacji w celu określenia ich odrębnych cech. W ten sposób dane mogą zostać wykorzystane do przetestowania pierwotnej hipotezy. Statystyki opisowe to kolejna metoda analizy zebranych informacji. Dane są badane, aby znaleźć najważniejsze ich cechy. W statystykach opisowych analitycy używają kilku podstawowych narzędzi - można użyć średniej lub średniej z zestawu liczb. Pomaga to określić ogólny trend aczkolwiek nie zapewnia to dużej dokładności przy ocenie ogólnego obrazu zebranych danych. W tej fazie ma miejsce również modelowanie i tworzenie formuł matematycznych - stosowane są w celu identyfikacji zależności między zmiennymi, takich jak korelacja lub przyczynowość.</p>
+</section>
+<section id="raportowanie-i-dystrybucja-wyników" class="level3" data-number="2.6.5">
+<h3 data-number="2.6.5" class="anchored" data-anchor-id="raportowanie-i-dystrybucja-wyników"><span class="header-section-number">2.6.5</span> Raportowanie i dystrybucja wyników</h3>
+<p>Ta faza polega na ustalaniu w jakiej formie przekazywać wyniki. Analityk może rozważyć róże techniki wizualizacji danych, aby w sposób wyraźnym i skuteczny przekazać wnioski z analizy odbiorcom. Wizualizacja danych wykorzystuje formy graficzne jak wykresy i tabele. Tabele są przydatne dla użytkownika, który może wyszukiwać konkretne rekordy, podczas gdy wykresy (np. wykresy słupkowe lub liniowe) dają spojrzenie ilościowych na zbiór analizowanych danych.</p>
+</section>
+</section>
+<section id="skąd-brać-dane" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="skąd-brać-dane"><span class="header-section-number">2.7</span> Skąd brać dane?</h2>
+<p>Darmowa repozytoria danych:</p>
+<ul>
+<li>Bank danych lokalnych GUS - <a href="https://bdl.stat.gov.pl/BDL/start">link</a></li>
+<li>Otwarte dane - <a href="https://dane.gov.pl/">link</a></li>
+<li>Bank Światowy - <a href="https://data.worldbank.org/">link</a></li>
+</ul>
+<p>Przydatne strony:</p>
+<ul>
+<li><a href="https://www.kaggle.com/" class="uri">https://www.kaggle.com/</a></li>
+<li><a href="https://archive.ics.uci.edu/ml/index.php" class="uri">https://archive.ics.uci.edu/ml/index.php</a></li>
+</ul>
+</section>
+<section id="koncepcja-tidy-data" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="koncepcja-tidy-data"><span class="header-section-number">2.8</span> Koncepcja “Tidy data”</h2>
+<p>Koncepcja czyszczenia danych (ang. tidy data):</p>
+<ul>
+<li>WICKHAM, Hadley . Tidy Data. Journal of Statistical Software, [S.l.], v. 59, Issue 10, p.&nbsp;1 - 23, sep. 2014. ISSN 1548-7660. Available at: <a href="https://www.jstatsoft.org/v059/i10" class="uri">https://www.jstatsoft.org/v059/i10</a>. Date accessed: 25 oct. 2018. doi:http://dx.doi.org/10.18637/jss.v059.i10.</li>
+</ul>
+<section id="zasady-czystych-danych" class="level3 smaller" data-number="2.8.1">
+<h3 class="smaller anchored" data-number="2.8.1" data-anchor-id="zasady-czystych-danych"><span class="header-section-number">2.8.1</span> Zasady “czystych danych”</h3>
+<p>Idealne dane są zaprezentowane w tabeli:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Imię</th>
+<th>Wiek</th>
+<th>Wzrost</th>
+<th>Kolor oczu</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Adam</td>
+<td>26</td>
+<td>167</td>
+<td>Brązowe</td>
+</tr>
+<tr class="even">
+<td>Sylwia</td>
+<td>34</td>
+<td>164</td>
+<td>Piwne</td>
+</tr>
+<tr class="odd">
+<td>Tomasz</td>
+<td>42</td>
+<td>183</td>
+<td>Niebieskie</td>
+</tr>
+</tbody>
+</table>
+<p>Na co powinniśmy zwrócić uwagę?</p>
+<ul>
+<li>jedna obserwacja (jednostka statystyczna) = jeden wiersz w tabeli/macierzy/ramce danych</li>
+<li>wartości danej cechy znajdują się w kolumnach</li>
+<li>jeden typ/rodzaj obserwacji w jednej tabeli/macierzy/ramce danych</li>
+</ul>
+</section>
+<section id="przykłady-nieuporządkowanych-danych" class="level3" data-number="2.8.2">
+<h3 data-number="2.8.2" class="anchored" data-anchor-id="przykłady-nieuporządkowanych-danych"><span class="header-section-number">2.8.2</span> Przykłady nieuporządkowanych danych</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Imię</th>
+<th>Wiek</th>
+<th>Wzrost</th>
+<th>Brązowe</th>
+<th>Niebieskie</th>
+<th>Piwne</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Adam</td>
+<td>26</td>
+<td>167</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>Sylwia</td>
+<td>34</td>
+<td>164</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Tomasz</td>
+<td>42</td>
+<td>183</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nagłowki kolumn muszą odpowiadać cechom, a nie wartościom zmiennych.</strong></p>
+</section>
+<section id="długie-czy-szerokie-dane" class="level3" data-number="2.8.3">
+<h3 data-number="2.8.3" class="anchored" data-anchor-id="długie-czy-szerokie-dane"><span class="header-section-number">2.8.3</span> Długie czy szerokie dane?</h3>
+<p><a href="https://seaborn.pydata.org/tutorial/data_structure.html#long-form-vs-wide-form-data" class="uri">https://seaborn.pydata.org/tutorial/data_structure.html#long-form-vs-wide-form-data</a></p>
+</section>
+</section>
+<section id="parę-rad-na-dobre-prezentacje" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="parę-rad-na-dobre-prezentacje"><span class="header-section-number">2.9</span> Parę rad na dobre prezentacje</h2>
+<p>Edward Tufte, prof z Yale, <a href="https://www.edwardtufte.com/" class="uri">https://www.edwardtufte.com/</a></p>
+<ol type="1">
+<li><p>Prezentuj dane “na bogato”.</p></li>
+<li><p>Nie ukrywaj danych, pokazuj prawdę.</p></li>
+<li><p>Nie używaj wykresów śmieciowych.</p></li>
+<li><p>Pokazuj zmienność danych, a nie projektuj jej.</p></li>
+<li><p>Wykres ma posiadać jak najmniejszy współczynnik kłamstwa (lie-factor).</p></li>
+<li><p>Powerpoint to zło!</p></li>
+</ol>
+<section id="współczynnik-kłamstwa" class="level3" data-number="2.9.1">
+<h3 data-number="2.9.1" class="anchored" data-anchor-id="współczynnik-kłamstwa"><span class="header-section-number">2.9.1</span> Współczynnik kłamstwa</h3>
+<p><a href="https://www.facebook.com/janinadaily/photos/a.1524649467770881/2836063543296127/?paipv=0&amp;eav=AfbVIDx5un8ZOklKI9c-B1jP4nOoNa2QMmJmjoA-291JNNgM1L_NmoCGMS_mJOy4xjo&amp;_rdr" class="uri">https://www.facebook.com/janinadaily/photos/a.1524649467770881/2836063543296127/?paipv=0&amp;eav=AfbVIDx5un8ZOklKI9c-B1jP4nOoNa2QMmJmjoA-291JNNgM1L_NmoCGMS_mJOy4xjo&amp;_rdr</a></p>
+<ul>
+<li>stosunek efektu widocznego na wykresie do efektu wykazywanego przez dane, na podstawie których ten wykres narysowaliśmy.</li>
+</ul>
+<p><a href="https://infovis-wiki.net/wiki/Lie_Factor" class="uri">https://infovis-wiki.net/wiki/Lie_Factor</a></p>
+</section>
+<section id="współczynnik-kłamstwa-1" class="level3" data-number="2.9.2">
+<h3 data-number="2.9.2" class="anchored" data-anchor-id="współczynnik-kłamstwa-1"><span class="header-section-number">2.9.2</span> Współczynnik kłamstwa</h3>
+<p><img src="droga.png" class="img-fluid"></p>
+<p>[Tufte, 1991] Edward Tufte, The Visual Display of Quantitative Information, Second Edition, Graphics Press, USA, 1991, p.&nbsp;57 – 69.</p>
+<p><span class="math display">\[\operatorname{LieFactor} = \frac{\text{rozmiar efektu widocznego na wykresie}}{\text{rozmiar efektu wynikającego z danych}}\]</span></p>
+<p><span class="math display">\[\text{rozmiar efektu} = \frac{|\text{druga wartość}-\text{pierwsza wartość}|}{\text{pierwsza wartość}}\]</span></p>
+<p><img src="droga.png" class="img-fluid"></p>
+<p><span class="math display">\[\operatorname{LieFactor} = \frac{\frac{5.3-0.6}{0.6}}{\frac{27.5-18}{18}} \approx 14.8\]</span></p>
+</section>
+</section>
+<section id="jak-tworzyć" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="jak-tworzyć"><span class="header-section-number">2.10</span> Jak tworzyć?</h2>
+<ul>
+<li><a href="https://bookdown.org/rudolf_von_ems/jak_sie_nie_dac/stats_graphs.html" class="uri">https://bookdown.org/rudolf_von_ems/jak_sie_nie_dac/stats_graphs.html</a></li>
+<li><a href="https://www.data-to-viz.com/" class="uri">https://www.data-to-viz.com/</a></li>
+<li><a href="https://100.datavizproject.com/" class="uri">https://100.datavizproject.com/</a></li>
+</ul>
+</section>
+<section id="bibliografia" class="level2 smaller" data-number="2.11">
+<h2 class="smaller anchored" data-number="2.11" data-anchor-id="bibliografia"><span class="header-section-number">2.11</span> Bibliografia</h2>
+<ul>
+<li><a href="https://pl.wikipedia.org/wiki/Wizualizacja" class="uri">https://pl.wikipedia.org/wiki/Wizualizacja</a></li>
+<li><a href="https://mfiles.pl/pl/index.php/Analiza_danych" class="uri">https://mfiles.pl/pl/index.php/Analiza_danych</a>, dostęp online 1.04.2019.</li>
+<li>Walesiak M., Gatnar E., Statystyczna analiza danych z wykorzystaniem programu R, PWN, Warszawa, 2009.</li>
+<li>Wasilewska E., Statystyka opisowa od podstaw, Podręcznik z zadaniami, Wydawnictwo SGGW, Warszawa, 2009.</li>
+<li><a href="https://en.wikipedia.org/wiki/Cognitive_reflection_test" class="uri">https://en.wikipedia.org/wiki/Cognitive_reflection_test</a>, dostęp online 20.03.2023.</li>
+<li><a href="https://qlikblog.pl/edward-tufte-dobre-praktyki-prezentacji-danych/" class="uri">https://qlikblog.pl/edward-tufte-dobre-praktyki-prezentacji-danych/</a>, dostęp online 20.03.2023.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Skopiowano!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Skopiowano!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Wizualizacja Danych 2024">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Wizualizacja Danych 2024</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./numpy.html" class="pagination-link" aria-label="NumPy">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">NumPy</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/pjastr/wd2024uwm/issues/new" class="toc-action"><i class="bi bi-github"></i>Zgłoś problem</a></li></ul></div></div></div></footer></body></html>
