@@ -1,0 +1,17 @@
+# NumPy - zadania
+
+1.  Utwórz tablicę NumPy o wymiarach 3x2, a następnie zmień jej kształt na 2x3 bez zmiany danych.
+
+2.  Dla danej tablicy NumPy zawierającej co najmniej 10 elementów, wykonaj indeksowanie, aby uzyskać trzeci element, a następnie "krojenie", aby uzyskać elementy od trzeciego do szóstego.
+
+3.  Utwórz tablicę zawierającą 10 równo rozmieszczonych punktów między 0 a 100. Następnie, wykorzystując utworzoną tablicę, oblicz wartości funkcji kwadratowej $y = x^2$ dla każdego punktu. Wyniki zapisz w nowej tablicy.
+
+4.  Wygeneruj tablicę zawierającą 20 punktów równomiernie rozłożonych w zakresie od $\pi$ do $2\pi$ i użyj tej tablicy do obliczenia i wyświetlenia sinusa dla każdego punktu. Wyniki zapisz w osobnej tablicy.
+
+5.  Stwórz tablicę składającą się z 15 punktów równomiernie rozłożonych między -5 a 5. Następnie, na podstawie tej tablicy, utwórz dwie nowe tablice: jedną zawierającą wartości funkcji eksponencjalnej $e^x$ dla każdego z punktów, a drugą zawierającą logarytm naturalny dla tych punktów, gdzie punkty równoznaczne z wartością mniejszą lub równą 0 są pomijane.
+
+6. Stwórz tablicę `logArray`, używając funkcji `logspace`, która zawiera 30 punktów rozłożonych logarytmicznie między $10^1$ a $10^5$. Następnie oblicz średnią wartość wszystkich elementów w tej tablicy.
+
+7. Wygeneruj tablicę `frequencies`, korzystając z funkcji `logspace`, aby otrzymać 25 punktów logarytmicznie równomiernie rozłożonych między częstotliwościami $10^2$ Hz a $10^6$ Hz. Użyj tej tablicy do symulacji wartości pewnego sygnału w zależności od częstotliwości i zapisz wyniki w nowej tablicy `signalValues`.
+
+8. Korzystając z funkcji `logspace`, utwórz tablicę `resistances` reprezentującą wartości rezystancji, które są rozłożone logarytmicznie w zakresie od $1\Omega$ do $1M\Omega$ włącznie, z 40 punktami. 

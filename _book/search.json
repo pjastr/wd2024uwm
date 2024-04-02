@@ -154,7 +154,7 @@
     "href": "numpy.html#lista-a-tablica",
     "title": "3  NumPy",
     "section": "3.2 Lista a tablica",
-    "text": "3.2 Lista a tablica\n\nimport numpy as np\nimport time\n\nstart_time = time.time()\nmy_arr = np.arange(1000000)\nmy_list = list(range(1000000))\nstart_time = time.time()\nmy_arr2 = my_arr * 2\nprint(\"--- %s seconds ---\" % (time.time() - start_time))\nstart_time = time.time()\nmy_list2 = [x * 2 for x in my_list]\nprint(\"--- %s seconds ---\" % (time.time() - start_time))\n\n--- 0.0022504329681396484 seconds ---\n--- 0.08477473258972168 seconds ---",
+    "text": "3.2 Lista a tablica\n\nimport numpy as np\nimport time\n\nstart_time = time.time()\nmy_arr = np.arange(1000000)\nmy_list = list(range(1000000))\nstart_time = time.time()\nmy_arr2 = my_arr * 2\nprint(\"--- %s seconds ---\" % (time.time() - start_time))\nstart_time = time.time()\nmy_list2 = [x * 2 for x in my_list]\nprint(\"--- %s seconds ---\" % (time.time() - start_time))\n\n--- 0.002004384994506836 seconds ---\n--- 0.05983471870422363 seconds ---",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>NumPy</span>"
     ]
@@ -307,6 +307,16 @@
     "text": "3.17 Pseudolosowe\nhttps://numpy.org/doc/stable/reference/random/index.html\nBibliografia:\n\nDokumentacja biblioteki, https://numpy.org/doc/stable/, dostęp online 5.03.2021.\nRobert Jahansson, Matematyczny Python. Obliczenia naukowe i analiza danych z użyciem NumPy, SciPy i Matplotlib, Wyd. Helion, 2021.\nhttps://www.tutorialspoint.com/numpy/index.htm, dostęp online 20.03.2019.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>NumPy</span>"
+    ]
+  },
+  {
+    "objectID": "numpy-zadania.html",
+    "href": "numpy-zadania.html",
+    "title": "4  NumPy - zadania",
+    "section": "",
+    "text": "Utwórz tablicę NumPy o wymiarach 3x2, a następnie zmień jej kształt na 2x3 bez zmiany danych.\nDla danej tablicy NumPy zawierającej co najmniej 10 elementów, wykonaj indeksowanie, aby uzyskać trzeci element, a następnie “krojenie”, aby uzyskać elementy od trzeciego do szóstego.\nUtwórz tablicę zawierającą 10 równo rozmieszczonych punktów między 0 a 100. Następnie, wykorzystując utworzoną tablicę, oblicz wartości funkcji kwadratowej \\(y = x^2\\) dla każdego punktu. Wyniki zapisz w nowej tablicy.\nWygeneruj tablicę zawierającą 20 punktów równomiernie rozłożonych w zakresie od \\(\\pi\\) do \\(2\\pi\\) i użyj tej tablicy do obliczenia i wyświetlenia sinusa dla każdego punktu. Wyniki zapisz w osobnej tablicy.\nStwórz tablicę składającą się z 15 punktów równomiernie rozłożonych między -5 a 5. Następnie, na podstawie tej tablicy, utwórz dwie nowe tablice: jedną zawierającą wartości funkcji eksponencjalnej \\(e^x\\) dla każdego z punktów, a drugą zawierającą logarytm naturalny dla tych punktów, gdzie punkty równoznaczne z wartością mniejszą lub równą 0 są pomijane.\nStwórz tablicę logArray, używając funkcji logspace, która zawiera 30 punktów rozłożonych logarytmicznie między \\(10^1\\) a \\(10^5\\). Następnie oblicz średnią wartość wszystkich elementów w tej tablicy.\nWygeneruj tablicę frequencies, korzystając z funkcji logspace, aby otrzymać 25 punktów logarytmicznie równomiernie rozłożonych między częstotliwościami \\(10^2\\) Hz a \\(10^6\\) Hz. Użyj tej tablicy do symulacji wartości pewnego sygnału w zależności od częstotliwości i zapisz wyniki w nowej tablicy signalValues.\nKorzystając z funkcji logspace, utwórz tablicę resistances reprezentującą wartości rezystancji, które są rozłożone logarytmicznie w zakresie od \\(1\\Omega\\) do \\(1M\\Omega\\) włącznie, z 40 punktami.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>NumPy - zadania</span>"
     ]
   }
 ]

@@ -10,6 +10,7 @@ book:
     - index.qmd
     - trocheteorii.qmd
     - numpy.qmd
+    - numpy-zadania.qmd
   downloads: pdf
   repo-url: https://github.com/pjastr/wd2024uwm
   repo-actions: [issue]
