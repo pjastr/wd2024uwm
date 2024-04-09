@@ -11,6 +11,7 @@ book:
     - trocheteorii.qmd
     - numpy.qmd
     - numpy-zadania.qmd
+    - pandas.qmd
   downloads: pdf
   repo-url: https://github.com/pjastr/wd2024uwm
   repo-actions: [issue]

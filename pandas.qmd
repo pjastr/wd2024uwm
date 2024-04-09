@@ -1,0 +1,685 @@
+# Pandas
+
+
+Pandas jest biblioteką Pythona służącą do analizy i manipulowania danymi
+
+
+Import:
+
+```python
+import pandas as pd
+```
+
+
+## Podstawowe byty
+
+Seria - Series
+
+![](51.png)
+
+---
+
+Ramka danych - DataFrame 
+
+![](52.png)
+
+
+
+```{python}
+#| echo: true
+import pandas as pd
+import numpy as np
+
+s = pd.Series([3, -5, 7, 4])
+print(s)
+print("values")
+print(s.values)
+print(type(s.values))
+t = np.sort(s.values)
+print(t)
+print(s.index)
+print(type(s.index))
+
+```
+
+
+
+```{python}
+#| echo: true
+import pandas as pd
+import numpy as np
+
+s = pd.Series([3, -5, 7, 4], index=['a', 'b', 'c', 'd'])
+print(s)
+print(s['b'])
+s['b'] = 8
+print(s)
+print(s[s > 5])
+print(s * 2)
+print(np.sin(s))
+
+```
+
+
+```{python} 
+#| echo: true
+import pandas as pd
+
+d = {'key1': 350, 'key2': 700, 'key3': 70}
+s = pd.Series(d)
+print(s)
+
+```
+
+
+```{python} 
+#| echo: true
+import pandas as pd
+
+d = {'key1': 350, 'key2': 700, 'key3': 70}
+k = ['key0', 'key2', 'key3', 'key1']
+s = pd.Series(d, index=k)
+print(s)
+pd.isnull(s)
+pd.notnull(s)
+s.isnull()
+s.notnull()
+s.name = "Wartosc"
+s.index.name = "Klucz"
+print(s)
+
+```
+
+
+
+```{python} 
+#| echo: true
+import pandas as pd
+
+data = {'Country': ['Belgium', 'India', 'Brazil'],
+        'Capital': ['Brussels', 'New Delhi', 'Brasília'],
+        'Population': [11190846, 1303171035, 207847528]}
+frame = pd.DataFrame(data)
+print(frame)
+df = pd.DataFrame(data, columns=['Country', 'Population', 'Capital'])
+print(df)
+
+```
+
+```{python} 
+#| echo: true
+import pandas as pd
+
+data = {'Country': ['Belgium', 'India', 'Brazil'],
+        'Capital': ['Brussels', 'New Delhi', 'Brasília'],
+        'Population': [11190846, 1303171035, 207847528]}
+print(df.iloc[[0], [0]])
+print("--")
+print(df.loc[[0], ['Country']])
+print("--")
+print(df.loc[2])
+print("--")
+print(df.loc[:, 'Capital'])
+print("--")
+print(df.loc[1, 'Capital'])
+
+```
+
+1.  `loc`:
+
+*   To metoda indeksowania oparta na etykietach, co oznacza, że używa nazw etykiet kolumn i indeksów wierszy do wyboru danych.
+*   Działa na podstawie etykiet indeksu oraz etykiet kolumny, co pozwala na wygodniejsze filtrowanie danych.
+*   Obsługuje zarówno jednostkowe etykiety, jak i zakresy etykiet.
+*   Działa również z etykietami nieliczbowymi.
+*   Przykład użycia: `df.loc[1:3, ['A', 'B']]` - zwraca wiersze od indeksu 1 do 3 (włącznie) oraz kolumny 'A' i 'B'.
+
+2.  `iloc`:
+
+*   To metoda indeksowania oparta na pozycji, co oznacza, że używa liczbowych indeksów kolumn i wierszy do wyboru danych.
+*   Działa na podstawie liczbowych indeksów zarówno dla wierszy, jak i kolumn.
+*   Obsługuje jednostkowe indeksy oraz zakresy indeksów.
+*   W przypadku używania zakresów indeksów, zakres jest półotwarty, co oznacza, że prawy kraniec nie jest uwzględniany.
+*   Przykład użycia: `df.iloc[1:3, 0:2]` - zwraca wiersze od indeksu 1 do 3 (bez 3) oraz kolumny od indeksu 0 do 2 (bez 2).
+
+```{python} 
+#| echo: true
+import pandas as pd
+
+data = {'Country': ['Belgium', 'India', 'Brazil'],
+        'Capital': ['Brussels', 'New Delhi', 'Brasília'],
+        'Population': [11190846, 1303171035, 207847528]}
+print(df['Population'])       
+print("--")
+print(df[df['Population'] > 1200000000])
+print("--")
+print(df.drop('Country', axis=1))
+print("--")
+```
+
+```{python} 
+#| echo: true
+import pandas as pd
+
+data = {'Country': ['Belgium', 'India', 'Brazil'],
+        'Capital': ['Brussels', 'New Delhi', 'Brasília'],
+        'Population': [11190846, 1303171035, 207847528]}
+print("Shape:", df.shape)
+print("--")
+print("Index:", df.index)
+print("--")
+print("columns:", df.columns)
+print("--")
+df.info()
+print("--")
+print(df.count())
+
+```
+
+## Uzupełnianie braków
+
+```{python} 
+#| echo: true
+import pandas as pd
+
+s = pd.Series([3, -5, 7, 4], index=['a', 'b', 'c', 'd'])
+s2 = pd.Series([7, -2, 3], index=['a', 'c', 'd'])
+print(s + s2)
+print("--")
+print(s.add(s2, fill_value=0))
+print("--")
+print(s.mul(s2, fill_value=2))
+
+```
+
+## Obsługa  plików csv
+
+
+Funkcja `pandas.read_csv`
+
+Dokumentacja: [link](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html)
+
+Wybrane argumenty:
+
+* `filepath` - ścieżka dostępu
+* `sep=_NoDefault.no_default, delimiter=None` - separator
+* `header='infer'` - nagłówek - domyślnie nazwy kolumn, ew. `header=None` oznacza brak nagłówka
+* `index_col=None` - ustalenie kolumny na indeksy (nazwy wierszy)
+* `thousands=None` - separator tysięczny
+* `decimal='.'` - separator dziesiętny
+
+Zapis `pandas.DataFrame.to_csv`
+
+Dokumentacja: [link](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_csv.html)
+
+## Obsługa  plików z Excela
+
+Funkcja `pandas.read_excel`
+
+<https://pandas.pydata.org/docs/reference/api/pandas.read_excel.html>
+
+** Ważne: trzeba zainstalować bibliotekę `openpyxl` do importu .xlsx oraz `xlrd` do importu .xls (nie trzeba ich importować w kodzie jawnie w większości wypadków)
+
+Wybrane argumenty:
+
+* `io` - ścieżka dostępu
+* `sheet_name=0` - nazwa arkusza
+* `header='infer'` - nagłówek - domyślnie nazwy kolumn, ew. `header=None` oznacza brak nagłówka
+* `index_col=None` - ustalenie kolumny na indeksy (nazwy wierszy)
+* `thousands=None` - separator tysięczny
+* `decimal='.'` - separator dziesiętny
+
+## Repozytorium z testowymi plikami
+
+* <https://github.com/pjastr/SamleTestFilesVD>
+
+## Operacje manipulacyjne
+
+Ściągawka <https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf>
+
+* `merge`
+
+<https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html>
+
+Funkcja `merge` służy do łączenia dwóch ramek danych wzdłuż wspólnej kolumny, podobnie jak operacje JOIN w SQL. 
+
+```python
+DataFrame.merge(right, how='inner', on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=('_x', '_y'), copy=True, indicator=False, validate=None)
+```
+
+Gdzie:
+
+- `right`: ramka danych, którą chcesz dołączyć do oryginalnej ramki danych.
+- `how`: określa typ łączenia. Dostępne są cztery typy: 'inner', 'outer', 'left' i 'right'. 'inner' to domyślna wartość, która zwraca tylko te wiersze, które mają pasujące klucze w obu ramkach danych.
+- `on`: nazwa lub lista nazw, które mają być używane do łączenia. Musi to być nazwa występująca zarówno w oryginalnej, jak i prawej ramce danych. 
+- `left_on` i `right_on`: nazwy kolumn w lewej i prawej ramce danych, które mają być używane do łączenia. Można to użyć, jeśli nazwy kolumn nie są takie same.
+- `left_index` i `right_index`: czy indeksy z lewej i prawej ramki danych mają być używane do łączenia.
+- `sort`: czy wynikowa ramka danych ma być posortowany według łączonych kluczy.
+- `suffixes`: sufiksy, które mają być dodane do nazw kolumn, które nachodzą na siebie. Domyślnie to ('_x', '_y').
+- `copy`: czy zawsze kopiować dane, nawet jeśli nie są potrzebne.
+- `indicator`: dodaj kolumnę do wynikowej ramki danych, która pokazuje źródło każdego wiersza.
+- `validate`: sprawdź, czy określone zasady łączenia są spełnione.
+
+
+```{python}
+#| echo: true
+import pandas as pd
+
+df1 = pd.DataFrame({
+    'A': ['A0', 'A1', 'A2', 'A3'],
+    'B': ['B0', 'B1', 'B2', 'B3'],
+    'key': ['K0', 'K1', 'K0', 'K1']
+})
+
+df2 = pd.DataFrame({
+    'C': ['C0', 'C1'],
+    'D': ['D0', 'D1']},
+    index=['K0', 'K1']
+)
+
+print(df1)
+print(df2)
+merged_df = df1.merge(df2, left_on='key', right_index=True)
+print(merged_df)
+```
+
+```{python}
+#| echo: true
+import pandas as pd
+
+df1 = pd.DataFrame({
+    'key': ['K0', 'K1', 'K2', 'K3'],
+    'A': ['A0', 'A1', 'A2', 'A3'],
+    'B': ['B0', 'B1', 'B2', 'B3']
+})
+
+df2 = pd.DataFrame({
+    'key': ['K0', 'K1', 'K4', 'K5'],
+    'C': ['C0', 'C1', 'C2', 'C3'],
+    'D': ['D0', 'D1', 'D2', 'D3']
+})
+
+print(df1)
+
+print(df2)
+
+inner_merged_df = df1.merge(df2, how='inner', on='key', suffixes=('_left', '_right'), indicator=True)
+outer_merged_df = df1.merge(df2, how='outer', on='key', suffixes=('_left', '_right'), indicator=True)
+left_merged_df = df1.merge(df2, how='left', on='key', suffixes=('_left', '_right'), indicator=True)
+right_merged_df = df1.merge(df2, how='right', on='key', suffixes=('_left', '_right'), indicator=True)
+
+print("Inner join")
+print(inner_merged_df)
+
+print("Outer join")
+print(outer_merged_df)
+
+print("Left join")
+print(left_merged_df)
+
+print("Right join")
+print(right_merged_df)
+```
+
+* `join`
+
+<https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html>
+
+Metoda `join` jest używana do łączenia dwóch ramek danych wzdłuż osi. 
+
+Podstawowe użycie tej metody wygląda następująco:
+
+```python
+DataFrame.join(other, on=None, how='left', lsuffix='', rsuffix='', sort=False)
+```
+
+Gdzie:
+
+- `other`: ramka danych, którą chcesz dołączyć do oryginalnej ramki danych.
+- `on`: nazwa lub lista nazw kolumn w oryginalnej ramxce danych, do których chcesz dołączyć. 
+- `how`: określa typ łączenia. Dostępne są cztery typy: 'inner', 'outer', 'left' i 'right'. 'left' to domyślna wartość, która zwraca wszystkie wiersze z oryginalnej ramki danych i pasujące wiersze z drugiej ramki danych. Wartości są uzupełniane wartością NaN, jeśli nie ma dopasowania.
+- `lsuffix` i `rsuffix`: sufiksy do dodania do kolumn, które się powtarzają. Domyślnie jest to puste.
+- `sort`: czy sortować dane według klucza.
+
+
+```{python}
+#| echo: true
+import pandas as pd
+
+df1 = pd.DataFrame({
+    'A': ['A0', 'A1', 'A2'],
+    'B': ['B0', 'B1', 'B2']},
+    index=['K0', 'K1', 'K2']
+)
+
+df2 = pd.DataFrame({
+    'C': ['C0', 'C2', 'C3'],
+    'D': ['D0', 'D2', 'D3']},
+    index=['K0', 'K2', 'K3']
+)
+
+print(df1)
+
+print(df2)
+
+joined_df = df1.join(df2)
+print(joined_df)
+```
+
+
+* `concat`
+
+<https://pandas.pydata.org/docs/reference/api/pandas.concat.html>
+
+Metoda `concat` jest używana do łączenia dwóch lub więcej ramek danych wzdłuż określonej osi. 
+
+Podstawowe użycie tej metody wygląda następująco:
+
+```python
+pandas.concat(objs, axis=0, join='outer', ignore_index=False, keys=None, levels=None, names=None, verify_integrity=False, sort=False, copy=True)
+```
+
+Gdzie:
+
+- `objs`: sekwencja ramek danych, które chcesz połączyć.
+- `axis`: oś, wzdłuż której chcesz łączyć ramki danych. Domyślnie to 0 (łączenie wierszy, pionowo), ale można także ustawić na 1 (łączenie kolumn, poziomo).
+- `join`: określa typ łączenia. Dostępne są dwa typy: 'outer' i 'inner'. 'outer' to domyślna wartość, która zwraca wszystkie kolumny z każdej ramki danych. 'inner' zwraca tylko te kolumny, które są wspólne dla wszystkich ramek danych.
+- `ignore_index`: jeśli ustawione na True, nie używa indeksów z ramek danych do tworzenia indeksu w wynikowej ramce danych. Zamiast tego tworzy nowy indeks od 0 do n-1.
+- `keys`: wartości do skojarzenia z obiektami.
+- `levels`: określone indeksy dla nowej ramki danych.
+- `names`: nazwy dla poziomów indeksów (jeśli są wielopoziomowe).
+- `verify_integrity`: sprawdza, czy nowy, skonkatenowana ramka danych nie ma powtarzających się indeksów.
+- `sort`: czy sortować niekonkatenacyjną oś (np. indeksy, jeśli axis=0), niezależnie od danych.
+- `copy`: czy zawsze kopiować dane, nawet jeśli nie są potrzebne.
+
+
+```{python}
+#| echo: true
+import pandas as pd
+
+df1 = pd.DataFrame({
+    'A': ['A0', 'A1', 'A2'],
+    'B': ['B0', 'B1', 'B2']
+})
+
+df2 = pd.DataFrame({
+    'A': ['A3', 'A4', 'A5'],
+    'B': ['B3', 'B4', 'B5']
+})
+
+print(df1)
+
+print(df2)
+
+concatenated_df = pd.concat([df1, df2], ignore_index=True)
+print(concatenated_df)
+```
+
+```{python}
+#| echo: true
+import pandas as pd
+
+df1 = pd.DataFrame({
+    'A': ['A0', 'A1', 'A2'],
+    'B': ['B0', 'B1', 'B2']
+})
+
+df2 = pd.DataFrame({
+    'C': ['C0', 'C1', 'C2'],
+    'D': ['D0', 'D1', 'D2']
+})
+
+print(df1)
+
+print(df2)
+
+concatenated_df_axis1 = pd.concat([df1, df2], axis=1)
+concatenated_df_keys = pd.concat([df1, df2], keys=['df1', 'df2'])
+
+print(concatenated_df_axis1)
+print(concatenated_df_keys)
+```
+
+* `pivot`
+
+<https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot.html>
+
+![](62.png)
+
+Metoda `pivot` jest używana do przekształcenia danych z formatu "długiego" do "szerokiego". 
+
+Podstawowe użycie tej metody wygląda następująco:
+
+```python
+DataFrame.pivot(index=None, columns=None, values=None)
+```
+
+Gdzie:
+
+- `index`: nazwa kolumny lub lista nazw kolumn, które mają stać się indeksem w nowej ramce danych.
+- `columns`: nazwa kolumny, z której unikalne wartości mają stać się kolumnami w nowej ramce danych.
+- `values`: nazwa kolumny lub lista nazw kolumn, które mają stać się wartościami dla nowych kolumn w nowej ramce danych.
+
+
+```{python}
+#| echo: true
+import pandas as pd
+
+df = pd.DataFrame({
+    'foo': ['one', 'one', 'one', 'two', 'two', 'two'],
+    'bar': ['A', 'B', 'C', 'A', 'B', 'C'],
+    'baz': [1, 2, 3, 4, 5, 6],
+    'zoo': ['x', 'y', 'z', 'q', 'w', 't'],
+})
+
+print(df)
+
+pivot_df = df.pivot(index='foo', columns='bar', values='baz')
+print(pivot_df)
+```
+
+
+* `wide_to_long`
+
+<https://pandas.pydata.org/docs/reference/api/pandas.wide_to_long.html>
+
+
+
+* `melt`
+
+![](61.png)
+
+<https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.melt.html>
+
+
+Funkcja `melt` służy do przekształcania danych z formatu szerokiego na długi. 
+
+Podstawowe użycie tej metody wygląda następująco:
+
+```python
+pandas.melt(frame, id_vars=None, value_vars=None, var_name=None, value_name='value', col_level=None)
+```
+
+Gdzie:
+
+- `frame`: ramka danych, którą chcesz przetworzyć.
+- `id_vars`: kolumna(y), które chcesz zachować jako identyfikatory. Te kolumny nie będą zmieniane.
+- `value_vars`: kolumna(y), które chcesz przekształcić na pary klucz-wartość. Jeżeli nie jest podane, wszystkie kolumny nie będące `id_vars` zostaną użyte.
+- `var_name`: nazwa nowej kolumny, która będzie zawierała nazwy kolumn przekształconych na pary klucz-wartość. Domyślnie to 'variable'.
+- `value_name`: nazwa nowej kolumny, która będzie zawierała wartości kolumn przekształconych na pary klucz-wartość. Domyślnie to 'value'.
+- `col_level`: jeżeli kolumny są wielopoziomowe, to jest poziom, który będzie użyty do przekształcania kolumn na pary klucz-wartość.
+
+
+
+```{python}
+#| echo: true
+import pandas as pd
+
+df = pd.DataFrame({
+    'A': ['foo', 'bar', 'baz'],
+    'B': ['one', 'one', 'two'],
+    'C': [2.0, 1.0, 3.0],
+    'D': [3.0, 2.0, 1.0]
+})
+print(df)
+melted_df = df.melt(id_vars=['A', 'B'], value_vars=['C', 'D'], var_name='My_Var', value_name='My_Val')
+print(melted_df)
+```
+
+
+
+
+## "Tidy data"
+
+
+| Imię | Wiek | Wzrost | Kolor oczu |
+| --- | --- | --- | --- |
+| Adam | 26 | 167 | Brązowe |
+| Sylwia | 34 | 164 | Piwne | 
+| Tomasz | 42 | 183 | Niebieskie |
+
+* jedna obserwacja (jednostka statystyczna) = jeden wiersz w
+tabeli/macierzy/ramce danych
+* wartosci danej cechy znajduja sie w kolumnach
+* jeden typ/rodzaj obserwacji w jednej tabeli/macierzy/ramce
+danych
+
+
+
+## Obsługa brakujących danych
+
+```{python}
+#| echo: true
+import numpy as np
+import pandas as pd
+
+string_data = pd.Series(['aardvark', 'artichoke', np.nan, 'avocado'])
+print(string_data)
+print(string_data.isnull())
+print(string_data.dropna())
+
+```
+
+---
+
+```{python}
+#| echo: true
+from numpy import nan as NA
+import pandas as pd
+
+data = pd.DataFrame([[1., 6.5, 3.], [1., NA, NA], 
+                     [NA, NA, NA], [NA, 6.5, 3.]])
+cleaned = data.dropna()
+print(cleaned)
+print(data.dropna(how='all'))
+data[4] = NA
+print(data.dropna(how='all', axis=1))
+print(data)
+print(data.fillna(0))
+print(data.fillna({1: 0.5, 2: 0}))
+```
+
+## Usuwanie duplikatów
+
+```{python} 
+#| echo: true
+import pandas as pd
+
+data = pd.DataFrame({'k1': ['one', 'two'] * 3 + ['two'],
+                     'k2': [1, 1, 2, 3, 3, 4, 4]})
+print(data)
+print(data.duplicated())
+print(data.drop_duplicates())
+```
+
+## Zastępowanie wartościami
+
+```{python}
+#| echo: true
+import pandas as pd
+import numpy as np
+
+data = pd.Series([1., -999., 2., -999., -1000., 3.])
+print(data)
+print(data.replace(-999, np.nan))
+print(data.replace([-999, -1000], np.nan))
+print(data.replace([-999, -1000], [np.nan, 0]))
+print(data.replace({-999: np.nan, -1000: 0}))
+```
+
+
+## Dyskretyzacja i podział na koszyki
+
+```{python}
+#| echo: true
+import pandas as pd
+
+ages = [20, 22, 25, 27, 21, 23, 37, 31, 61, 45, 41, 32]
+bins = [18, 25, 35, 60, 100]
+cats = pd.cut(ages, bins)
+print(cats)
+print(cats.codes)
+print(cats.categories)
+print(pd.value_counts(cats))
+```
+
+---
+
+```{python}
+#| echo: true
+import pandas as pd
+
+ages = [20, 22, 25, 27, 21, 23, 37, 31, 61, 45, 41, 32]
+bins = [18, 25, 35, 60, 100]
+cats2 = pd.cut(ages, [18, 26, 36, 61, 100], right=False)
+print(cats2)
+group_names = ['Youth', 'YoungAdult',
+               'MiddleAged', 'Senior']
+print(pd.cut(ages, bins, labels=group_names))
+```
+
+---
+
+```{python}
+#| echo: true
+import pandas as pd
+import numpy as np
+
+data = np.random.rand(20)
+print(pd.cut(data, 4, precision=2))
+```
+
+---
+
+```{python}
+#| echo: true
+import pandas as pd
+import numpy as np
+
+data = np.random.randn(1000)
+cats = pd.qcut(data, 4)
+print(cats)
+print(pd.value_counts(cats))
+```
+
+## Wykrywanie i filtrowanie elementów odstających
+
+```{python}
+#| echo: true
+import pandas as pd
+import numpy as np
+
+data = pd.DataFrame(np.random.randn(1000, 4))
+print(data.describe())
+print("---")
+col = data[2]
+print(col[np.abs(col) > 3])
+print("---")
+print(data[(np.abs(data) > 3).any(axis=1)])
+```
+
+
+
+Bibliografia:
+
+* Dokumentacja biblioteki, <https://pandas.pydata.org/>, dostęp online 5.03.2021.
+* Hannah Stepanek, Thinking in Pandas, How to Use the Python Data Analysis Library the Right Way, Apress, 2020.
