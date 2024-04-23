@@ -680,7 +680,93 @@ print("---")
 print(data[(np.abs(data) > 3).any(axis=1)])
 ```
 
+## Zmiana typu w kolumnie
 
+```{python}
+#| echo: true
+import pandas as pd
+
+
+data = {
+    'A': ['1', '2', '3', '4', '5', '6'],
+    'B': ['7.5', '8.5', '9.5', '10.5', '11.5', '12.5'],
+    'C': ['x', 'y', 'z', 'x', 'y', 'z']
+}
+df = pd.DataFrame(data)
+
+# Wyświetlenie oryginalnej ramki danych
+print("Oryginalna ramka danych:")
+print(df)
+
+# Zmiana typu danych kolumny 'A' na int
+df['A'] = pd.Series(df['A'], dtype=int)
+
+# Zmiana typu danych kolumny 'B' na float
+df['B'] = pd.Series(df['A'], dtype=float)
+
+# Wyświetlenie ramki danych po zmianie typów
+print("\nRamka danych po zmianie typów:")
+print(df)
+
+```
+
+
+```{python}
+#| echo: true
+import pandas as pd
+
+
+data = {
+    'A': ['1', '2', '3', '4', '5', '6'],
+    'B': ['7.5', '8.5', '9.5', '10.5', '11.5', '12.5'],
+    'C': ['x', 'y', 'z', 'x', 'y', 'z']
+}
+df = pd.DataFrame(data)
+
+# Wyświetlenie oryginalnej ramki danych
+print("Oryginalna ramka danych:")
+print(df)
+
+# Zmiana typu danych kolumny 'A' na int
+df['A'] = df['A'].astype(int)
+
+# Zmiana typu danych kolumny 'B' na float
+df['B'] = df['B'].astype(float)
+
+# Wyświetlenie ramki danych po zmianie typów
+print("\nRamka danych po zmianie typów:")
+print(df)
+
+```
+
+## Zmiana znaku kategoriach
+
+```{python}
+#| echo: true
+import pandas as pd
+
+# Tworzenie ramki danych
+data = {
+    'A': ['abc', 'def', 'ghi', 'jkl', 'mno', 'pqr'],
+    'B': ['1.23', '4.56', '7.89', '0.12', '3.45', '6.78'],
+    'C': ['xyz', 'uvw', 'rst', 'opq', 'lmn', 'ijk']
+}
+df = pd.DataFrame(data)
+
+# Wyświetlenie oryginalnej ramki danych
+print("Oryginalna ramka danych:")
+print(df)
+
+# Zmiana małych liter na duże w kolumnie 'A'
+df['A'] = df['A'].str.upper()
+
+# Zastąpienie kropki przecinkiem w kolumnie 'B'
+df['B'] = df['B'].str.replace('.', ',')
+
+# Wyświetlenie ramki danych po modyfikacji
+print("\nRamka danych po modyfikacji:")
+print(df)
+```
 
 Bibliografia:
 
