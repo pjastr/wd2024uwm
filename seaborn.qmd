@@ -1,0 +1,328 @@
+# Seaborn
+
+<https://seaborn.pydata.org/>
+
+```python
+import seaborn as sns
+```
+
+Biblioteka Seaborn, będąca nakładką na Matplotlib, ułatwia tworzenie "pięknych i czytelnych" wykresów statystycznych w języku Python. 
+
+
+1. Eksploracyjna analiza danych (EDA): Seaborn jest często używany do wizualizacji danych podczas eksploracyjnej analizy danych, co pomaga zrozumieć strukturę, trendy i relacje między zmiennymi w danych. Pozwala to na identyfikację wzorców, wykrywanie wartości odstających oraz ewentualnych problemów z danymi.
+
+2. Wizualizacja danych kategorialnych: Seaborn oferuje wiele rodzajów wykresów kategorialnych, takich jak wykresy słupkowe, pudełkowe, skrzypcowe, czy punktowe. Dzięki temu łatwo porównać wartości między różnymi kategoriami, co pomaga lepiej zrozumieć dane.
+
+3. Wizualizacja danych wielowymiarowych: Seaborn pozwala na tworzenie wykresów z wieloma zmiennymi jednocześnie. Funkcje takie jak `pairplot` i `heatmap` są użyteczne do analizy wielowymiarowych danych i identyfikacji korelacji między zmiennymi.
+
+4. Wizualizacja rozkładów statystycznych: Seaborn umożliwia tworzenie histogramów, wykresów estymacji gęstości jądra (KDE) oraz dystrybuanty empirycznej. Dzięki tym narzędziom można zrozumieć rozkład danych, co jest niezbędne w analizie statystycznej i modelowaniu.
+
+5. Wizualizacja regresji: Seaborn oferuje narzędzia do analizy regresji, takie jak `regplot` i `lmplot`. Te funkcje pozwalają na wizualizację linii regresji, co ułatwia zrozumienie relacji między zmiennymi oraz ocenę dopasowania modeli.
+
+6. Tworzenie siatek wykresów: Seaborn pozwala na tworzenie siatek wykresów za pomocą funkcji takich jak `FacetGrid` i `PairGrid`. Ułatwia to analizę i porównanie danych dla różnych podgrup, warstw czy kombinacji zmiennych.
+
+7. Personalizacja wykresów: Seaborn umożliwia personalizację wykresów poprzez zmianę styli, palet kolorów oraz innych parametrów wykresów. Dzięki temu można tworzyć atrakcyjne i profesjonalnie wyglądające wizualizacje danych.
+
+8. Prezentacje i raporty: Seaborn może być używany do tworzenia wysokiej jakości wizualizacji danych w celach prezentacji, raportów czy publikacji naukowych. Estetyka i łatwość w personalizacji wykresów sprawiają, że wizualizacje stworzone w Seaborn są czytelne i angażujące dla odbiorców.
+
+9. Analiza czasowa: Seaborn może być używany do analizy danych czasowych, takich jak szeregi czasowe czy dane sezonowe. Funkcje takie jak `lineplot` czy `relplot` pozwalają na wizualizację trendów oraz ewentualnych zmian w danych na przestrzeni czasu.
+
+10. Porównanie modeli i algorytmów: Wizualizacje danych stworzone za pomocą Seaborn mogą być użyte do porównywania wyników różnych modeli uczenia maszynowego czy algorytmów. Można w ten sposób prezentować wyniki analizy, jakość klasyfikacji, estymacji czy prognozowania.
+
+11. Nauczanie i edukacja: Seaborn jest często stosowany jako narzędzie do nauczania i edukacji, zwłaszcza w kontekście nauki statystyki, analizy danych i uczenia maszynowego. Wizualizacje danych ułatwiają zrozumienie złożonych koncepcji i relacji między zmiennymi.
+
+## Ładowanie wbudowanych danych
+
+Funkcja `sns.load_dataset()` pozwala na ładowanie wbudowanych zestawów danych w bibliotece Seaborn. Wszystkie wbudowane zestawy danych są przechowywane jako ramki danych Pandas.
+
+1. Ładowanie zestawu danych "iris":
+
+```{python}
+#| echo: true
+import seaborn as sns
+
+iris_data = sns.load_dataset('iris')
+print(iris_data.head())
+```
+
+
+
+2. Ładowanie zestawu danych "titanic":
+
+```{python}
+#| echo: true
+import seaborn as sns
+
+titanic_data = sns.load_dataset('titanic')
+print(titanic_data.head())
+```
+
+
+3. Ładowanie zestawu danych "tips":
+
+```{python}
+#| echo: true
+import seaborn as sns
+
+tips_data = sns.load_dataset('tips')
+print(tips_data.head())
+```
+
+
+## Wykres punktowy
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Ładowanie danych
+iris_data = sns.load_dataset('iris')
+
+# Tworzenie wykresu punktowego
+sns.scatterplot(x='sepal_length', y='sepal_width', data=iris_data)
+
+# Dodanie tytułu i etykiet osi
+plt.title('Wykres punktowy długości i szerokości kielicha (sepal)')
+plt.xlabel('Długość kielicha (cm)')
+plt.ylabel('Szerokość kielicha (cm)')
+
+# Wyświetlenie wykresu
+plt.show()
+```
+
+
+
+Funkcja `sns.scatterplot()` oferuje dodatkowe parametry, które pozwalają na modyfikację wykresu. Przykłady obejmują:
+
+1. Parametr `hue`: pozwala na dodanie kolorowania punktów na podstawie wartości zmiennej kategorialnej. 
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Ładowanie danych
+iris_data = sns.load_dataset('iris')
+
+# Tworzenie wykresu punktowego z parametrem 'hue'
+sns.scatterplot(x='sepal_length', y='sepal_width', hue='species', data=iris_data)
+
+# Dodanie tytułu i etykiet osi
+plt.title('Wykres punktowy długości i szerokości kielicha (sepal) z parametrem hue')
+plt.xlabel('Długość kielicha (cm)')
+plt.ylabel('Szerokość kielicha (cm)')
+
+# Wyświetlenie wykresu
+plt.show()
+
+```
+
+2. Parametr `size`: pozwala na zmianę wielkości punktów na podstawie wartości zmiennej numerycznej.
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Ładowanie danych
+iris_data = sns.load_dataset('iris')
+
+# Tworzenie wykresu punktowego z parametrem 'size'
+sns.scatterplot(x='sepal_length', y='sepal_width', size='petal_length', data=iris_data)
+
+# Dodanie tytułu i etykiet osi
+plt.title('Wykres punktowy długości i szerokości kielicha (sepal) z parametrem size')
+plt.xlabel('Długość kielicha (cm)')
+plt.ylabel('Szerokość ielicha (cm)')
+
+# Wyświetlenie wykresu
+plt.show()
+
+```
+
+3. Parametr `style`: pozwala na zmianę stylu punktów na podstawie wartości zmiennej kategorialnej.
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Ładowanie danych
+iris_data = sns.load_dataset('iris')
+
+# Tworzenie wykresu punktowego z parametrem 'size'
+sns.scatterplot(x='sepal_length', y='sepal_width', size='petal_length', data=iris_data)
+
+# Dodanie tytułu i etykiet osi
+plt.title('Wykres punktowy długości i szerokości kielicha (sepal) z parametrem size')
+plt.xlabel('Długość kielicha (cm)')
+plt.ylabel('Szerokość kielicha (cm)')
+
+# Wyświetlenie wykresu
+plt.show()
+
+```
+
+## Wykres liniowy
+
+Funkcja `sns.lineplot()` w bibliotece Seaborn służy do tworzenia wykresów liniowych, które pozwalają na wizualizację związku między dwiema zmiennymi, zwłaszcza w przypadku danych czasowych. Wykres liniowy jest użyteczny do prezentacji trendów i zmian w danych na przestrzeni czasu lub innej zmiennej ciągłej.
+
+Oto przykład użycia funkcji `sns.lineplot()`:
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Przykładowe dane
+data = {
+    'year': [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],
+    'value': [100, 110, 105, 120, 130, 140, 150, 170, 180, 200]
+}
+
+# Ładowanie danych jako ramki danych Pandas
+import pandas as pd
+df = pd.DataFrame(data)
+
+# Tworzenie wykresu liniowego
+sns.lineplot(x='year', y='value', data=df)
+
+# Dodanie tytułu i etykiet osi
+plt.title('Przykład wykresu liniowego')
+plt.xlabel('Rok')
+plt.ylabel('Wartość')
+
+# Wyświetlenie wykresu
+plt.show()
+```
+
+W powyższym przykładzie tworzymy wykres liniowy na podstawie ramki danych `df`. Parametry `x` i `y` określają zmienne, które mają być przedstawione na osiach wykresu. Parametr `data` wskazuje źródło danych, w tym przypadku ramkę danych Pandas.
+
+Funkcja `sns.lineplot()` oferuje dodatkowe parametry, które pozwalają na modyfikację wykresu. Przykłady obejmują:
+
+1. Parametr `hue`: pozwala na dodanie kolorowania linii na podstawie wartości zmiennej kategorialnej.
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Przykładowe dane
+data = {
+    'year': [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019] * 2,
+    'value': [100, 110, 105, 120, 130, 140, 150, 170, 180, 200] +
+             [200, 180, 170, 160, 150, 140, 130, 120, 110, 100],
+    'category': ['A'] * 10 + ['B'] * 10
+}
+
+# Ładowanie danych jako ramki danych Pandas
+df = pd.DataFrame(data)
+
+# Tworzenie wykresu liniowego z parametrem 'hue'
+sns.lineplot(x='year', y='value', hue='category', data=df)
+
+# Dodanie tytułu i etykiet osi
+plt.title('Przykład wykresu liniowego z parametrem hue')
+plt.xlabel('Rok')
+plt.ylabel('Wartość')
+
+# Wyświetlenie wykresu
+plt.show()
+
+```
+
+2. Parametr `style`: pozwala na zmianę stylu linii na podstawie wartości zmiennej kategorialnej.
+
+```python
+sns.lineplot(x='year', y='value', style='category', data=df)
+```
+
+3. Parametr `markers`: pozwala na dodanie znaczników do punktów danych.
+
+```python
+sns.lineplot(x='year', y='value', markers=True, data=df)
+```
+
+4. Parametr `ci`: pozwala na dodanie przedziału ufności (confidence interval) dla wykresu, który może być użyteczny w przypadku wielokrotnych pomiarów dla tych samych wartości na osi X.
+
+```python
+sns.lineplot(x='year', y='value', ci=95, data=df)
+```
+
+
+## Style
+
+Biblioteka Seaborn pozwala na dostosowywanie estetyki wykresów za pomocą palet kolorów i styli, co pozwala na uzyskanie atrakcyjnych i czytelnych wizualizacji danych. Oto kilka przykładów, jak możemy dostosować estetykę wykresów w Seaborn:
+
+1. Palety kolorów:
+
+Palety kolorów pozwalają na zmianę kolorystyki wykresów. Seaborn oferuje kilka wbudowanych palet kolorów, które można łatwo zastosować do wykresów.
+
+Przykład użycia palety kolorów 'coolwarm' w wykresie punktowym:
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+iris_data = sns.load_dataset('iris')
+
+# Ustawienie palety kolorów 'coolwarm'
+sns.set_palette('coolwarm')
+
+sns.scatterplot(x='sepal_length', y='sepal_width', hue='species', data=iris_data)
+
+plt.show()
+```
+
+Aby zresetować paletę kolorów do domyślnej, użyj `sns.set_palette('deep')`.
+
+2. Style wykresów:
+
+Seaborn pozwala na zmianę stylu wykresów, co może wpłynąć na ogólny wygląd i czytelność wizualizacji. Biblioteka oferuje kilka wbudowanych styli.
+
+Przykład użycia stylu 'whitegrid' w wykresie punktowym:
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+iris_data = sns.load_dataset('iris')
+
+# Ustawienie stylu 'whitegrid'
+sns.set_style('whitegrid')
+
+sns.scatterplot(x='sepal_length', y='sepal_width', hue='species', data=iris_data)
+
+plt.show()
+```
+
+Inne dostępne style to: 'darkgrid', 'white', 'ticks' i 'dark'. Aby zresetować styl do domyślnego, użyj `sns.set_style('darkgrid')`.
+
+3. Skalowanie elementów graficznych:
+
+Seaborn pozwala na skalowanie elementów graficznych, co może być przydatne w przypadku różnych rozdzielczości ekranów lub potrzeby zmiany rozmiaru wykresów.
+
+Przykład użycia kontekstu 'poster' w wykresie punktowym:
+
+```{python}
+#| echo: true
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+iris_data = sns.load_dataset('iris')
+
+# Ustawienie kontekstu 'poster'
+sns.set_context('poster')
+
+sns.scatterplot(x='sepal_length', y='sepal_width', hue='species', data=iris_data)
+
+plt.show()
+```
+
+Inne dostępne konteksty to: 'paper', 'notebook' i 'talk'. Aby zresetować kontekst do domyślnego, użyj `sns.set_context('notebook')`.
+
+Kombinując te metody, można tworzyć różnorodne, atrakcyjne i czytelne wizualizacje danych.

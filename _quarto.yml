@@ -12,6 +12,8 @@ book:
     - numpy.qmd
     - numpy-zadania.qmd
     - pandas.qmd
+    - matplotlib.qmd
+    - seaborn.qmd
   downloads: pdf
   repo-url: https://github.com/pjastr/wd2024uwm
   repo-actions: [issue]
