@@ -285,6 +285,8 @@ merged_df = df1.merge(df2, left_on='key', right_index=True)
 print(merged_df)
 ```
 
+![](merge.png)
+
 ```{python}
 #| echo: true
 import pandas as pd
@@ -322,6 +324,14 @@ print(left_merged_df)
 print("Right join")
 print(right_merged_df)
 ```
+
+![](merge_inner.png)
+
+![](merge_outer.png)
+
+![](merge_left.png)
+
+![](merge_right.png)
 
 * `join`
 
@@ -368,6 +378,7 @@ joined_df = df1.join(df2)
 print(joined_df)
 ```
 
+![](join.png)
 
 * `concat`
 
@@ -417,6 +428,8 @@ concatenated_df = pd.concat([df1, df2], ignore_index=True)
 print(concatenated_df)
 ```
 
+![](concat1.png)
+
 ```{python}
 #| echo: true
 import pandas as pd
@@ -440,7 +453,12 @@ concatenated_df_keys = pd.concat([df1, df2], keys=['df1', 'df2'])
 
 print(concatenated_df_axis1)
 print(concatenated_df_keys)
+
 ```
+
+![](concat2.png)
+
+![](concat3.png)
 
 * `pivot`
 
@@ -480,12 +498,46 @@ pivot_df = df.pivot(index='foo', columns='bar', values='baz')
 print(pivot_df)
 ```
 
+![](pivot.png)
 
 * `wide_to_long`
 
 <https://pandas.pydata.org/docs/reference/api/pandas.wide_to_long.html>
 
 
+Metoda `wide_to_long` jest używana do przekształcenia danych z szerokiego formatu (gdzie każda kolumna zawiera wiele zmiennych) do długiego formatu (gdzie każda kolumna zawiera jedną zmienną z wieloma pomiarami). Jest to przydatne, gdy mamy dane, które są rozłożone w wielu kolumnach z powtarzającymi się lub sekwencyjnymi nazwami, i chcemy przekształcić te dane w sposób, który ułatwia analizę i wizualizację.
+
+Wyjaśnienie parametrów `wide_to_long`
+
+- **stubnames**: Lista początkowych części nazw kolumn, które mają zostać przekształcone.
+- **i**: Nazwa kolumny lub lista kolumn, które identyfikują poszczególne wiersze. W naszym przykładzie jest to `id`, które unikalnie identyfikuje osobę.
+- **j**: Nazwa nowej kolumny, w której będą przechowywane różne poziomy zmiennych (w naszym przypadku rok).
+- **sep**: Opcjonalny separator (domyślnie `""`).
+
+```{python}
+#| echo: true
+import pandas as pd
+
+# Przykładowe dane
+data = {
+    'id': ['A', 'B', 'C'],
+    'height_2020': [180, 175, 165],
+    'weight_2020': [70, 76, 65],
+    'height_2021': [181, 176, 166],
+    'weight_2021': [71, 77, 66]
+}
+
+df = pd.DataFrame(data)
+
+# Przekształcenie do formatu długiego
+df_long = pd.wide_to_long(df, stubnames=['height', 'weight'], i='id', j='year', sep='_')
+df_long = df_long.reset_index()
+
+print(df_long)
+
+```
+
+![](wide_to_long.png)
 
 * `melt`
 
@@ -528,7 +580,7 @@ melted_df = df.melt(id_vars=['A', 'B'], value_vars=['C', 'D'], var_name='My_Var'
 print(melted_df)
 ```
 
-
+![](melt.png)
 
 
 ## "Tidy data"
