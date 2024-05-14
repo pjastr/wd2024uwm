@@ -248,23 +248,48 @@ Ta faza polega na ustalaniu w jakiej formie przekazywać wyniki. Analityk może 
 
 ## Skąd brać dane?
 
+::: {.content-visible when-format="html"}
+
 Darmowa repozytoria danych:
 
 -   Bank danych lokalnych GUS - [link](https://bdl.stat.gov.pl/BDL/start)
 -   Otwarte dane - [link](https://dane.gov.pl/)
 -   Bank Światowy - [link](https://data.worldbank.org/)
 
+
 Przydatne strony:
 
 -   <https://www.kaggle.com/>
 -   <https://archive.ics.uci.edu/ml/index.php>
 
+:::
+
+::: {.content-visible when-format="pdf"}
+Darmowa repozytoria danych:
+
+-   Bank danych lokalnych GUS - [link](https://bdl.stat.gov.pl/BDL/start)
+-   Otwarte dane - [link](https://dane.gov.pl/)
+-   Bank Światowy - [link](https://data.worldbank.org/)
+
+:::
 
 ## Koncepcja "Tidy data"
+
+::: {.content-visible when-format="html"}
 
 Koncepcja czyszczenia danych (ang. tidy data):
 
 -   WICKHAM, Hadley . Tidy Data. Journal of Statistical Software, \[S.l.\], v. 59, Issue 10, p. 1 - 23, sep. 2014. ISSN 1548-7660. Available at: <https://www.jstatsoft.org/v059/i10>. Date accessed: 25 oct. 2018. doi:http://dx.doi.org/10.18637/jss.v059.i10.
+
+:::
+
+::: {.content-visible when-format="pdf"}
+
+Koncepcja czyszczenia danych (ang. tidy data):
+
+-   WICKHAM, Hadley . Tidy Data. Journal of Statistical Software, \[S.l.\], v. 59, Issue 10, p. 1 - 23, sep. 2014. ISSN 1548-7660. Date accessed: 25 oct. 2018. doi:http://dx.doi.org/10.18637/jss.v059.i10.
+
+:::
 
 ### Zasady "czystych danych" {.smaller}
 
@@ -292,14 +317,30 @@ Na co powinniśmy zwrócić uwagę?
 
 **Nagłowki kolumn muszą odpowiadać cechom, a nie wartościom zmiennych.**
 
+::: {.content-visible when-format="html"}
+
 ### Długie czy szerokie dane?
 
 <https://seaborn.pydata.org/tutorial/data_structure.html#long-form-vs-wide-form-data>
 
+:::
+
 
 ## Parę rad na dobre prezentacje
 
+::: {.content-visible when-format="html"}
+
 Edward Tufte, prof z Yale, <https://www.edwardtufte.com/>
+
+
+:::
+
+::: {.content-visible when-format="pdf"}
+
+Edward Tufte, prof z Yale
+
+
+:::
 
 1.  Prezentuj dane "na bogato".
 
@@ -315,11 +356,21 @@ Edward Tufte, prof z Yale, <https://www.edwardtufte.com/>
 
 ### Współczynnik kłamstwa
 
+::: {.content-visible when-format="html"}
+
 <https://www.facebook.com/janinadaily/photos/a.1524649467770881/2836063543296127/?paipv=0&eav=AfbVIDx5un8ZOklKI9c-B1jP4nOoNa2QMmJmjoA-291JNNgM1L_NmoCGMS_mJOy4xjo&_rdr>
 
 -   stosunek efektu widocznego na wykresie do efektu wykazywanego przez dane, na podstawie których ten wykres narysowaliśmy.
 
 <https://infovis-wiki.net/wiki/Lie_Factor>
+
+:::
+
+::: {.content-visible when-format="pdf"}
+
+-   stosunek efektu widocznego na wykresie do efektu wykazywanego przez dane, na podstawie których ten wykres narysowaliśmy.
+
+:::
 
 ### Współczynnik kłamstwa
 
@@ -336,11 +387,14 @@ $$\text{rozmiar efektu} = \frac{|\text{druga wartość}-\text{pierwsza wartość
 
 $$\operatorname{LieFactor} = \frac{\frac{5.3-0.6}{0.6}}{\frac{27.5-18}{18}} \approx 14.8$$
 
+::: {.content-visible when-format="html"}
+
 ## Jak tworzyć?
 
 -   <https://bookdown.org/rudolf_von_ems/jak_sie_nie_dac/stats_graphs.html>
 -   <https://www.data-to-viz.com/>
 -   <https://100.datavizproject.com/>
+
 
 ## Bibliografia {.smaller}
 
@@ -350,3 +404,16 @@ $$\operatorname{LieFactor} = \frac{\frac{5.3-0.6}{0.6}}{\frac{27.5-18}{18}} \app
 -   Wasilewska E., Statystyka opisowa od podstaw, Podręcznik z zadaniami, Wydawnictwo SGGW, Warszawa, 2009.
 -   <https://en.wikipedia.org/wiki/Cognitive_reflection_test>, dostęp online 20.03.2023.
 -   <https://qlikblog.pl/edward-tufte-dobre-praktyki-prezentacji-danych/>, dostęp online 20.03.2023.
+
+:::
+
+::: {.content-visible when-format="pdf"}
+## Bibliografia {.smaller}
+
+-   https://pl.wikipedia.org/wiki/Wizualizacja
+-   https://mfiles.pl/pl/index.php/Analiza_danych, dostęp online 1.04.2019.
+-   Walesiak M., Gatnar E., Statystyczna analiza danych z wykorzystaniem programu R, PWN, Warszawa, 2009.
+-   Wasilewska E., Statystyka opisowa od podstaw, Podręcznik z zadaniami, Wydawnictwo SGGW, Warszawa, 2009.
+-   https://en.wikipedia.org/wiki/Cognitive_reflection_test, dostęp online 20.03.2023.
+-   https://qlikblog.pl/edward-tufte-dobre-praktyki-prezentacji-danych/, dostęp online 20.03.2023.
+:::
