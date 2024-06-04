@@ -1101,6 +1101,73 @@ plt.show()
 
 ```
 
+
+```{python}
+#| echo: true
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Tworzenie przykładowej ramki danych
+data = {
+    'Grupa': ['Grupa A', 'Grupa B', 'Grupa C', 'Grupa D'],
+    'Mężczyźni': [20, 35, 30, 35],
+    'Kobiety': [25, 32, 34, 20]
+}
+df = pd.DataFrame(data)
+
+# Ustawienie indeksu na kolumnę 'Grupa'
+df.set_index('Grupa', inplace=True)
+
+# Tworzenie wykresu
+ax = df.plot(kind='bar', width=0.8)
+
+# Dodanie etykiet, tytułu i legendy
+ax.set_ylabel('Wyniki')
+ax.set_title('Wyniki według grup i płci')
+ax.set_xticklabels(df.index, rotation=0)
+ax.legend(title='Płeć')
+
+plt.tight_layout()
+plt.show()
+
+```
+
+
+```{python}
+#| echo: true
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Tworzenie przykładowej ramki danych
+data = {
+    'Grupa': ['Grupa A', 'Grupa B', 'Grupa C', 'Grupa D'],
+    'Mężczyźni': [20, 35, 30, 35],
+    'Kobiety': [25, 32, 34, 20]
+}
+df = pd.DataFrame(data)
+
+# Ustawienie indeksu na kolumnę 'Grupa'
+df.set_index('Grupa', inplace=True)
+
+# Tworzenie wykresu
+fig, ax = plt.subplots()
+
+# Słupki dla mężczyzn
+rects1 = ax.bar(df.index, df['Mężczyźni'], label='Mężczyźni')
+
+# Słupki dla kobiet, nałożone na słupki dla mężczyzn
+rects2 = ax.bar(df.index, df['Kobiety'], bottom=df['Mężczyźni'], label='Kobiety')
+
+# Dodanie etykiet, tytułu i legendy
+ax.set_ylabel('Wyniki')
+ax.set_title('Wyniki według grup i płci')
+ax.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
 ## Wykres pudełkowy
 
 Wykres pudełkowy (inaczej box plot) jest stosowany do przedstawiania informacji o rozkładzie danych liczbowych oraz do identyfikacji wartości odstających. Jest szczególnie przydatny w przypadku analizy danych ciągłych, które mają różne wartości i rozkłady. Oto kilka typów danych, dla których wykres pudełkowy może być stosowany:

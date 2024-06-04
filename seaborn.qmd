@@ -251,6 +251,89 @@ sns.lineplot(x='year', y='value', markers=True, data=df)
 sns.lineplot(x='year', y='value', ci=95, data=df)
 ```
 
+## Wykres kołowy
+
+Nie jest bezpośrednio wspierany.
+
+## Wykres słupkowy
+
+
+```{python}
+#| echo: true
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Przykładowa ramka danych
+data = {'Kategoria': ['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D'],
+        'Wartość': [10, 15, 8, 12, 11, 14, 9, 13],
+        'Grupa': ['X', 'X', 'X', 'X', 'Y', 'Y', 'Y', 'Y']}
+df = pd.DataFrame(data)
+```
+
+Podstawowy wykres słupkowy:
+```{python}
+#| echo: true
+sns.barplot(x='Kategoria', y='Wartość', data=df)
+plt.title('Podstawowy wykres słupkowy')
+plt.show()
+```
+
+1. Przykład z `estimator`:
+```{python}
+#| echo: true
+sns.barplot(x='Kategoria', y='Wartość', data=df, estimator=max)
+plt.title("Wykres słupkowy z 'estimator=max'")
+plt.show()
+```
+W tym przykładzie `estimator=max` powoduje, że wysokość słupków będzie maksymalną wartością dla każdej kategorii.
+
+2. Przykład z `errorbar`:
+```{python}
+#| echo: true
+sns.barplot(x='Kategoria', y='Wartość', data=df, errorbar=None)
+plt.title("Wykres słupkowy z 'errorbar=None'")
+plt.show()
+```
+Tutaj `errorbar=None` powoduje, że nie będą wyświetlane przedziały ufności na wykresie.
+
+3. Przykład z `palette`:
+```{python}
+#| echo: true
+sns.barplot(x='Kategoria', y='Wartość', data=df, palette='Greens', hue='Kategoria')
+plt.title("Wykres słupkowy z 'palette=Greens'")
+plt.show()
+```
+Argument `palette='Greens'` ustawia paletę kolorów na odcienie zielonego.
+
+4. Przykład z `hue`:
+```{python}
+#| echo: true
+sns.barplot(x='Kategoria', y='Wartość', hue='Grupa', data=df)
+plt.title("Wykres słupkowy z 'hue=Grupa'")
+plt.show()
+```
+W tym przykładzie argument `hue='Grupa'` dzieli słupki dla każdej kategorii według wartości z kolumny 'Grupa'.
+
+5. Przykład z `orient`:
+```{python}
+#| echo: true
+sns.barplot(x='Wartość', y='Kategoria', data=df, orient='h')
+plt.title("Wykres słupkowy z 'orient=h'")
+plt.show()
+```
+Tutaj `orient='h'` zmienia orientację wykresu na poziomą.
+
+6. Przykład z `order`:
+```{python}
+#| echo: true
+sns.barplot(x='Kategoria', y='Wartość', data=df, order=['B', 'D', 'A', 'C'])
+plt.title("Wykres słupkowy z 'order=['B', 'D', 'A', 'C']'")
+plt.show()
+```
+Argument `order=['B', 'D', 'A', 'C']` określa kolejność kategorii na osi x.
+
+
 
 ## Style
 
